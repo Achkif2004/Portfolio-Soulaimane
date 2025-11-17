@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RoadMate – Project</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --press: "Press Start 2P", system-ui, sans-serif;
+      --green: #0F790A;
+      --card-bg: #2626454e;
+      --glass-b: rgba(255,255,255,.08);
+    }
+
+    /* ===== Matrix background ===== */
+    .matrix-container{
+      position: fixed; inset: 0; width:100%; height:100%;
+      perspective:1500px; background:#0d0d1a; overflow:hidden; z-index:-1; pointer-events:none;
+    }
+    .matrix-grid{
+      width:100%; height:100%;
+      background:
+        linear-gradient(#262645 1px, transparent 1px),
+        linear-gradient(90deg, #262645 1px, transparent 1px),
+        repeating-linear-gradient(45deg, rgba(0,255,170,0.05) 0px 1px, transparent 1px 12px),
+        repeating-linear-gradient(-45deg, rgba(0,255,170,0.05) 0px 1px, transparent 1px 12px),
+        radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
+      background-size:28px 28px,28px 28px,50px 50px,50px 50px,cover;
+      border:1px solid rgba(0,255,170,0.1);
+      box-shadow: inset 0 0 40px rgba(0,255,170,0.1), 0 0 60px rgba(0,255,170,0.15);
+      transform-style:preserve-3d; position:relative;
+    }
+    .matrix-grid::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent, rgba(0,255,170,0.4), transparent);
+      animation:borderFlow 6s linear infinite; pointer-events:none;
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+    .matrix-grid::after{
+      content:""; position:absolute; top:50%; left:50%; width:160px; height:160px;
+      background: radial-gradient(circle, rgba(0,255,170,0.15) 0%, transparent 70%);
+      transform: translate(-50%,-50%); animation: pulse 3.5s ease-in-out infinite alternate; z-index:1;
+    }
+    @keyframes borderFlow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    @keyframes pulse { 0%{transform:translate(-50%,-50%) scale(.85);opacity:.2} 100%{transform:translate(-50%,-50%) scale(1.1);opacity:.5} }
+
+    /* ===== Global ===== */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color:#eee; background:transparent; line-height:1.6
+    }
+    a{text-decoration:none}
+
+    /* ===== Header / Nav ===== */
+    header{
+      position:sticky; top:0; z-index:1000; padding:1rem 2rem;
+      border-bottom:1px solid #2b2b48; backdrop-filter: blur(6px);
+    }
+    .wrap{
+      max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      font-family:var(--press); color:var(--green); font-size:1rem; margin:0;
+    }
+    .close-link{
+      font-family:var(--press); color:var(--green);
+      font-size:.8rem; padding:.4rem .6rem; border:1px solid #2b2b48; border-radius:8px;
+      background: rgba(255,255,255,0.04);
+    }
+    .close-link:hover{ opacity:.85; }
+
+    /* ===== Layout ===== */
+    main{max-width:1100px; margin:0 auto; padding:2rem 1rem}
+    section{
+      background: var(--card-bg);
+      border-radius:12px; backdrop-filter: blur(3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      padding:2rem; margin: 1.5rem 0;
+      opacity:0; transform: translateY(30px); transition: .7s ease;
+    }
+    section.show{opacity:1; transform: translateY(0)}
+    h1,h2{font-family:var(--press); color:var(--green)}
+    h1{font-size:1.4rem; margin:0 0 1rem}
+    h2{font-size:1.1rem; margin:0 0 1rem}
+
+    .hero{display:grid; gap:1rem}
+
+    .grid-2{display:grid; gap:1rem; grid-template-columns:1fr; }
+    @media (min-width:900px){ .grid-2{grid-template-columns:1.1fr .9fr} }
+
+    /* Center het RoadMate logo in de rechthoek */
+    .imgbox{
+      border:1px solid #2b2b48; border-radius:10px; overflow:hidden; background:#0d0d1a;
+      display:flex; align-items:center; justify-content:center; min-height:260px;
+    }
+    .imgbox img{
+      display:block; max-width:90%; max-height:360px; height:auto; width:auto; object-fit:contain;
+    }
+
+    .btns{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.5rem}
+    .btn{
+      font-family:var(--press); color:#0d0d1a; background:var(--green);
+      padding:.6rem .8rem; border-radius:8px; font-size:.65rem; display:inline-block;
+    }
+
+    /* ===== Resultaat: gallery tiles ===== */
+    .gallery{
+      display:grid; gap:1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .tile{
+      position:relative; border:1px solid #2b2b48; border-radius:12px; overflow:hidden;
+      background:#0d0d1a; cursor: zoom-in;
+    }
+    .tile img{display:block; width:100%; height:100%; object-fit:cover; aspect-ratio: 16/10; transition: transform .5s ease}
+    .tile::after{
+      content:"Klik om te bekijken";
+      position:absolute; left:0; right:0; bottom:0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      color:#cfead0; font-family:var(--press); font-size:.55rem;
+      padding:.6rem .8rem; opacity:0; transform: translateY(10px); transition:.35s ease;
+    }
+    .tile:hover img{transform: scale(1.05)}
+    .tile:hover::after{opacity:1; transform: translateY(0)}
+
+    /* ===== Lightbox ===== */
+    .lightbox{
+      position: fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(0,0,0,.75);
+      z-index: 10000;
+      backdrop-filter: blur(3px);
+    }
+    .lightbox.open{display:flex}
+
+    .lb-frame{
+      position:relative; max-width:min(1100px, 92vw); max-height: 86vh;
+      border:1px solid var(--glass-b); background: rgba(12,12,22,.6);
+      border-radius:14px; overflow:hidden; box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+    .lb-img{
+      display:block; max-width:100%; max-height:86vh; width:auto; height:auto; object-fit:contain; background:#0d0d1a;
+      z-index: 1;
+    }
+
+    .lb-close{
+      position:absolute; top:.6rem; right:.6rem; width:38px; height:38px;
+      display:grid; place-items:center; border-radius:10px; border:1px solid var(--glass-b);
+      background: rgba(5, 4, 4, 0.04); color:#fff; cursor:pointer; font-size:20px;
+      backdrop-filter: blur(4px);
+      z-index: 5;
+    }
+    .lb-close:hover{background: rgba(255,255,255,.08)}
+
+    .lb-arrow{
+      position:absolute; top:50%; transform: translateY(-50%);
+      width:52px; height:52px; display:grid; place-items:center; border-radius:12px;
+      border:1px solid var(--glass-b);
+      background: rgba(39, 39, 39, 0.782); color:rgba(38, 176, 31, 0.776); cursor:pointer; font-size:20px;
+      user-select:none;
+      z-index: 4;
+    }
+    .lb-prev{ left:.6rem }
+    .lb-next{ right:.6rem }
+    .lb-arrow:hover{ background: rgba(255,255,255,.12) }
+
+    /* clickable sides for navigation (big hit areas) */
+    .lb-hit{
+      position:absolute; top:0; bottom:0; width:50%;
+      z-index: 3;
+    }
+    .lb-hit.left{ left:0 }
+    .lb-hit.right{ right:0 }
+  </style>
+</head>
+<body>
+  <!-- matrix bg -->
+  <div class="matrix-container"><div class="matrix-grid"></div></div>
+
+  <header>
+    <div class="wrap">
+      <h1 class="brand">RoadMate</h1>
+      <!-- CLOSE knop in juiste font/kleur; gaat terug naar de vorige positie op de homepagina -->
+      <a href="index.html" class="close-link" id="closeLink">CLOSE</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="over">
+      <h1>AI Auto-Copilot</h1>
+      <p>RoadMate helpt bestuurders in real time om verkeersregels beter te begrijpen en veiliger te rijden via spraakinteractie. Met behulp van verschillende API’s detecteert RoadMate de verkeersborden in de omgeving van de gebruiker en leest deze luidop voor. Wanneer de bestuurder een verkeersbord passeert, geeft de app een korte herinnering of toelichting over de betekenis ervan. Aan het einde van de rit ontvangt de gebruiker een korte quiz met vragen over de verkeersborden en informatie die tijdens de rit werden besproken — zo wordt verkeerseducatie op een interactieve en leerrijke manier versterkt.</p>
+    </section>
+
+    <section class="grid-2" id="features">
+      <div>
+        <h2>Belangrijkste features</h2>
+        <ul>
+          <li>Realtime spraakfeedback bij belangerijke verkeersborden.</li>
+          <li>Integratie met API's voor locatiebepaling.</li>
+          <li>Gepersonaliseerde quiz aan het einde van de rit.</li>
+        </ul>
+        <div class="btns">
+          <a href="https://roadmate-q5e8.onrender.com/" class="btn" target="_blank" rel="noopener">Website</a>
+          <a href="https://www.figma.com/design/7uHpOjbwOys7Y8EonG2HCG/Prototype---Roadmate?node-id=133-2210&p=f" class="btn" target="_blank" rel="noopener">Prototype</a>
+          <a href="https://github.com/Achkif2004/Roadmate" class="btn" target="_blank" rel="noopener">Repository</a>
+        </div>
+      </div>
+
+      <!-- Logo gecentreerd in de rechthoek -->
+      <div class="imgbox">
+        <img src="image/road mate logo.png" alt="RoadMate logo">
+      </div>
+    </section>
+
+    <section id="resultaat">
+      <h2>Resultaat</h2>
+      <p>Een klikbaar prototype met spraakprompts, schermen voor situaties en een dashboard met rij-statistieken. Hieronder enkele mockups:</p>
+
+      <!-- Gallery -->
+      <div class="gallery" id="gallery">
+        <div class="tile"><img src="image/roadmate mockups.png" alt="RoadMate mockup 1"></div>
+        <div class="tile"><img src="image/roadmate_gsm.jpg" alt="RoadMate mockup 2"></div>
+        <div class="tile"><img src="image/roadmate_desktop.png" alt="RoadMate mockup 3"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-frame">
+      <button class="lb-close" id="lbClose" aria-label="Sluiten">✕</button>
+
+      <!-- grote klikzones -->
+      <div class="lb-hit left" id="hitLeft" aria-hidden="true"></div>
+      <div class="lb-hit right" id="hitRight" aria-hidden="true"></div>
+
+      <!-- pijlen -->
+      <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Vorige">‹</button>
+      <button class="lb-arrow lb-next" id="lbNext" aria-label="Volgende">›</button>
+
+      <img class="lb-img" id="lbImg" src="" alt="Voorbeeld">
+    </div>
+  </div>
+
+  <script>
+    // "CLOSE" -> ga terug naar vorige pagina/positie; val terug op index.html
+    const closeLink = document.getElementById('closeLink');
+    closeLink.addEventListener('click', (e) => {
+      // Als er een history is, ga terug (behoudt scrollpositie)
+      if (window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+      // anders laat de href z'n werk doen (naar index.html)
+    });
+
+    // section reveal
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, {threshold:.15});
+    document.querySelectorAll('section').forEach(s => obs.observe(s));
+
+    // ===== Lightbox gallery =====
+    const gallery = Array.from(document.querySelectorAll('#gallery img'));
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const hitLeft = document.getElementById('hitLeft');
+    const hitRight = document.getElementById('hitRight');
+
+    let index = 0;
+
+    function openLB(i){
+      index = i;
+      updateLB();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function prev(){
+      index = (index - 1 + gallery.length) % gallery.length;
+      updateLB();
+    }
+    function next(){
+      index = (index + 1) % gallery.length;
+      updateLB();
+    }
+    function updateLB(){
+      const img = gallery[index];
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || 'Afbeelding';
+    }
+
+    // click handlers voor thumbs
+    gallery.forEach((img,i) => {
+      img.addEventListener('click', () => openLB(i));
+      img.parentElement.addEventListener('click', () => openLB(i));
+    });
+
+    // controls
+    lbClose.addEventListener('click', closeLB);
+    lbPrev.addEventListener('click', prev);
+    lbNext.addEventListener('click', next);
+    hitLeft.addEventListener('click', prev);
+    hitRight.addEventListener('click', next);
+
+    // keyboard
+    window.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLB();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === 'ArrowRight') next();
+    });
+
+    // klik buiten frame om te sluiten
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLB();
+    });
+
+    // swipe (mobiel)
+    let sx = 0, sy = 0;
+    lightbox.addEventListener('touchstart', (e)=>{ const t=e.touches[0]; sx=t.clientX; sy=t.clientY; }, {passive:true});
+    lightbox.addEventListener('touchend', (e)=>{
+      const t=e.changedTouches[0]; const dx=t.clientX - sx; const dy=t.clientY - sy;
+      if(Math.abs(dx) > 40 && Math.abs(dy) < 60){ dx>0 ? prev() : next(); }
+    }, {passive:true});
+  </script>
+</body>
+</html>
