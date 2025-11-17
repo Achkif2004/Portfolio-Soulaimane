@@ -356,6 +356,130 @@
         transform:scale(1);
       }
     }
+
+    /* ========== RESPONSIVE VOOR GSM ==========
+       Alles hieronder geldt voor small screens
+    ========================================= */
+    @media (max-width: 768px) {
+
+      body{
+        font-size:14px;
+      }
+
+      header{
+        padding:0.75rem 1rem;
+      }
+
+      .header-container{
+        gap:0.5rem;
+      }
+
+      header h1{
+        font-size:1.1rem;
+      }
+
+      nav a{
+        margin-left:0.75rem;
+        font-size:0.6rem;
+      }
+
+      section{
+        padding:2.5rem 1.25rem;
+        margin-top:1.5rem;
+      }
+
+      .intro{
+        padding:2.8rem 1.25rem;
+      }
+
+      .intro-gallery{
+        gap:1.5rem;
+      }
+
+      .intro-heading p{
+        font-size:0.5rem;
+        padding:0 0.5rem;
+      }
+
+      .intro-chips{
+        gap:0.35rem;
+      }
+
+      .intro-chip{
+        font-size:0.45rem;
+        padding:0.25rem 0.5rem;
+      }
+
+      /* 3D gallery kleiner */
+      .card-3d{
+        width:100%;
+        max-width:320px;
+        height:220px;
+      }
+      .card-3d div{
+        width:110px;
+        height:145px;
+      }
+
+      /* Portfolio: één kolom op gsm */
+      .portfolio-grid{
+        grid-template-columns:1fr;
+      }
+
+      .card{
+        aspect-ratio:16/10;
+      }
+
+      .card__title{
+        font-size:0.8rem !important;
+      }
+      .card__description{
+        font-size:0.75rem !important;
+      }
+      .card__button{
+        font-size:0.65rem !important;
+        padding:8px 10px !important;
+      }
+
+      /* Skills blok meer ademruimte */
+      #skills{
+        padding:2.8rem 1.5rem;
+      }
+
+      .skills-grid{
+        gap:1.5rem;
+      }
+
+      .skill img{
+        width:48px;
+        height:48px;
+      }
+
+      .skill-bar{
+        width:100%;
+      }
+
+      /* Contact labels iets kleiner */
+      label{
+        font-size:0.5rem;
+      }
+
+      /* Footer stacken */
+      .retro-footer{
+        font-size:0.45rem;
+      }
+
+      .footer-container{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:0.75rem;
+      }
+
+      .footer-links{
+        gap:1.5rem;
+      }
+    }
+
   </style>
 </head>
 <body>

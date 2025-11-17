@@ -192,6 +192,96 @@
     }
     .lb-hit.left{ left:0 }
     .lb-hit.right{ right:0 }
+
+    /* ========== RESPONSIVE – TABLET & GSM ========== */
+    @media (max-width: 900px){
+      main{
+        padding:1.5rem 1rem;
+      }
+      section{
+        padding:1.5rem 1.1rem;
+        margin:1rem 0;
+      }
+      h1{
+        font-size:1.25rem;
+      }
+      h2{
+        font-size:1rem;
+      }
+      .hero p{
+        font-size:0.95rem;
+      }
+    }
+
+    @media (max-width: 768px){
+      body{
+        font-size:14px;
+      }
+
+      header{
+        padding:0.75rem 1rem;
+      }
+
+      .wrap{
+        max-width:100%;
+      }
+
+      .brand{
+        font-size:0.9rem;
+      }
+
+      .close-link{
+        font-size:0.65rem;
+        padding:0.35rem 0.55rem;
+      }
+
+      .grid-2{
+        grid-template-columns:1fr;
+      }
+
+      .imgbox{
+        min-height:200px;
+      }
+
+      .gallery{
+        width:100%;
+        align-items:stretch;
+      }
+
+      .tile{
+        max-width:100%;
+      }
+
+      .lb-arrow{
+        width:40px;
+        height:40px;
+        font-size:18px;
+      }
+      .lb-close{
+        width:32px;
+        height:32px;
+        font-size:18px;
+      }
+    }
+
+    @media (max-width: 480px){
+      header{
+        padding:0.6rem 0.8rem;
+      }
+      main{
+        padding:1.2rem 0.8rem;
+      }
+      h1{
+        font-size:1.15rem;
+      }
+      .hero p{
+        font-size:0.9rem;
+      }
+      .tile::after{
+        font-size:0.5rem;
+        padding:0.5rem 0.6rem;
+      }
+    }
   </style>
 </head>
 <body>
