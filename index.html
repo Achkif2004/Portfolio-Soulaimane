@@ -11,6 +11,8 @@
     /* === Gebruik "Press Start 2P" === */
     :root{
       --font-press: "Press Start 2P", system-ui, sans-serif;
+      --neon:#00f7cc; --neon-dim:rgba(0,247,204,.2);
+      --panel:rgba(7,10,20,.78); --panel-strong:rgba(7,10,20,.92);
     }
 
     .press-start-2p-regular {
@@ -106,7 +108,11 @@
 
     /* === 3D cards (carousel) === */
     @keyframes autoRun3d{ from{ transform:perspective(800px) rotateY(-360deg) } to{ transform:perspective(800px) rotateY(0deg) } }
-    .card-3d{ position:relative; width:720px; height:360px; transform-style:preserve-3d; transform:perspective(1000px); animation:autoRun3d 25s linear infinite; will-change:transform; margin:1rem auto; display:flex; justify-content:center; align-items:center; }
+    .card-3d{
+      position:relative; width:720px; height:360px; transform-style:preserve-3d;
+      transform:perspective(1000px); animation:autoRun3d 25s linear infinite;
+      will-change:transform; margin:1rem auto; display:flex; justify-content:center; align-items:center;
+    }
     .card-3d div{
       position:absolute; width:160px; height:210px; background:#dcdcdc; border:2px solid lightgray; border-radius:8px;
       top:50%; left:50%; transform-origin:center center; box-shadow:0 8px 18px rgba(0,0,0,.25);
@@ -137,22 +143,118 @@
     }
     .card:hover{ transform: translateY(-3px); box-shadow:0 18px 40px rgba(0,0,0,.35), 0 0 0 5px #ffffff40; }
 
-    .card__image{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#f2f2f2; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+    .card__image{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#f2f2f2;
+      transition: transform .6s cubic-bezier(.22,1,.36,1);
+    }
     .card:hover .card__image{ transform: scale(1.025); }
 
     .card__content{
-      position:absolute; inset:0; padding:20px; box-sizing:border-box;
+      position:absolute; inset:0; padding:18px 18px 16px !important; box-sizing:border-box;
       transform-origin:bottom;
       display:flex; flex-direction:column; justify-content:flex-end; gap:.75rem;
-      /* basis (oude flip) blijft staan, maar wordt hieronder overruled naar smooth reveal */
-      transform: rotateX(-90deg);
-      transition: all .6s cubic-bezier(0.175,0.885,0.32,1.275);
-      background-color:#f2f2f2;  /* placeholder; echte thema-bg komt in overrides verderop */
+      background:
+        linear-gradient(180deg, transparent 0 28%, var(--panel) 55%, var(--panel-strong) 100%) !important;
+      border-top:1px solid rgba(0,255,170,.18);
+      backdrop-filter: blur(3px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 -6px 24px rgba(0,0,0,.25);
+      transform: none !important;
+      opacity: 0;
+      clip-path: inset(100% 0 0 0 round 0);
+      transition:
+        clip-path .8s cubic-bezier(.22,1,.36,1),
+        opacity .45s ease,
+        background .35s ease;
+      will-change: clip-path, opacity;
     }
-    .card__title{ margin:0; font-size:20px; color:#333; font-weight:700; }
-    .card__description{ margin:6px 0 12px; font-size:13px; color:#666; line-height:1.5; }
+    .card__title{
+      margin:0 0 4px 0; font-family:var(--font-press) !important; font-size:.95rem !important; letter-spacing:.5px;
+      color:var(--neon) !important;
+      text-shadow: 0 0 6px rgba(0,247,204,.55), 0 0 18px rgba(0,247,204,.25);
+      opacity:0; transform: translateY(8px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .card__description{
+      margin:6px 0 12px !important; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !important;
+      font-size:.8rem !important; line-height:1.5 !important; color:#d8fff4 !important;
+      opacity:0; transform: translateY(10px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
     .card__actions{ display:flex; gap:.5rem; flex-wrap:wrap; }
-    .card__button{ padding:10px 14px; border-radius:8px; background:#777; border:none; color:#fff; font-weight:600; cursor:pointer; }
+    .card__button{
+      --glow: 0 0 10px rgba(0,247,204,.35), 0 0 24px rgba(0,247,204,.18);
+      padding:10px 12px !important; border-radius:10px !important;
+      border:1px solid rgba(0,255,170,.35) !important;
+      background:
+        linear-gradient(180deg, rgba(0,247,204,.12), rgba(0,247,204,.08) 60%, rgba(0,247,204,.16)),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.08)) !important;
+      color:#0a1916 !important; font-weight:700 !important; font-size:.72rem !important; font-family:var(--font-press) !important;
+      letter-spacing:.5px !important; text-transform:uppercase !important;
+      box-shadow: var(--glow), inset 0 0 0 1px rgba(0,255,170,.22) !important;
+      transition: transform .15s ease, box-shadow .25s ease, filter .25s ease !important;
+      opacity:0; transform: translateY(12px);
+    }
+    .card__button:hover{ filter:brightness(1.08); box-shadow:0 0 14px rgba(0,247,204,.65), 0 0 30px rgba(0,247,204,.25); }
+    .card__button:active{ transform: translateY(13px); }
+
+    .card:hover .card__content,
+    .card:focus-within .card__content,
+    .card.revealed .card__content{
+      opacity:1; clip-path: inset(0 0 0 0);
+    }
+    .card__content::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
+      mix-blend-mode: overlay; opacity:0; transition: opacity .35s ease;
+    }
+    .card__content::before{
+      content:""; position:absolute; left:0; right:0; height:56px; top:-56px;
+      background:
+        radial-gradient(40% 100% at 50% 0%, rgba(0,247,204,.55) 0%, rgba(0,247,204,0) 70%),
+        linear-gradient(180deg, rgba(0,247,204,.35), rgba(0,247,204,.0));
+      filter: blur(8px);
+      opacity:.0; transform: translateY(0);
+      transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+      pointer-events:none;
+    }
+    .card:hover .card__content::after,
+    .card:focus-within .card__content::after,
+    .card.revealed .card__content::after{
+      opacity:.32;
+    }
+    .card:hover .card__content::before,
+    .card:focus-within .card__content::before,
+    .card.revealed .card__content::before{
+      transform: translateY(100%);
+      opacity:.9;
+    }
+    .card:hover .card__title,
+    .card:focus-within .card__title,
+    .card.revealed .card__title{
+      opacity:1; transform: translateY(0); transition-delay:.05s;
+    }
+    .card:hover .card__description,
+    .card:focus-within .card__description,
+    .card.revealed .card__description{
+      opacity:1; transform: translateY(0); transition-delay:.14s;
+    }
+    .card:hover .card__button,
+    .card:focus-within .card__button,
+    .card.revealed .card__button{
+      opacity:1; transform: translateY(0); transition-delay:.22s;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .card__content{
+        transition: opacity .25s linear !important;
+        clip-path: inset(0 0 0 0) !important;
+      }
+      .card__content::before, .card__content::after{ display:none; }
+      .card__title, .card__description, .card__button{
+        transition: opacity .25s linear !important; transform:none !important; opacity:1 !important;
+      }
+      .card__image{ transform:none !important; }
+    }
 
     /* === Skills === */
     #skills{ padding:4rem 17rem; }
@@ -189,10 +291,10 @@
 
     /* Contact */
     form{ display:grid; gap:1rem; max-width:500px; margin:auto; }
+    label{ color:#fff; font-family:"Press Start 2P", system-ui; font-size:.55rem; display:grid; gap:.4rem; }
     input, textarea, button{ padding:.8rem; border:1px solid #ccc; border-radius:4px; font:inherit; }
-    button{ background:#0c0b38; color:#fff; border:1px solid white; font-weight:bold; transition: transform .2s, background .3s; }
+    button{ background:#0c0b38; color:#fff; border:1px solid white; font-weight:bold; transition: transform .2s, background .3s; cursor:pointer; }
     button:hover{ background:#6d46b9; transform:scale(1.05); }
-    #form-message{ margin-top:1rem; font-size:1rem; font-weight:bold; color:green; opacity:0; transition:opacity .5s ease; }
 
     /* === RETRO FOOTER === */
     .retro-footer{
@@ -209,147 +311,59 @@
     .footer-links a:hover::after{ transform:scaleX(1.2); }
     .retro-footer p{ margin:0; white-space:nowrap; font-size:.55rem; }
 
-    /* Page transition (circle reveal) */
+    /* ===== PAGE TRANSITION – MATRIX VIERKANTEN (naar projecten) ===== */
     .page-transition{
-      position:fixed; inset:0; background: radial-gradient(circle at center, #835bd8 0%, #4a2b8f 100%);
-      clip-path: circle(0% at 50% 50%); transition: clip-path 1s ease; z-index:9999;
-    }
-    .page-transition.active{ clip-path: circle(150% at 50% 50%); }
-
-    /* ==========================================================
-       OVERRIDES: flapje-inhoud in jouw game/code stijl
-       ========================================================== */
-    :root{
-      --neon:#00f7cc; --neon-dim:rgba(0,247,204,.2);
-      --panel:rgba(7,10,20,.78); --panel-strong:rgba(7,10,20,.92);
-    }
-    .card__content{
-      background:
-        linear-gradient(180deg, transparent 0 28%, var(--panel) 55%, var(--panel-strong) 100%) !important;
-      padding:18px 18px 16px !important;
-      border-top:1px solid rgba(0,255,170,.18);
-      backdrop-filter: blur(3px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 -6px 24px rgba(0,0,0,.25);
-    }
-    .card__title{
-      margin:0 0 4px 0; font-family:var(--font-press) !important; font-size:.95rem !important; letter-spacing:.5px;
-      color:var(--neon) !important;
-      text-shadow: 0 0 6px rgba(0,247,204,.55), 0 0 18px rgba(0,247,204,.25);
-      opacity:0; transform: translateY(8px);
-      transition: opacity .45s ease, transform .45s ease;
-    }
-    .card__description{
-      margin:6px 0 12px !important; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !important;
-      font-size:.8rem !important; line-height:1.5 !important; color:#d8fff4 !important; opacity:.95;
-      opacity:0; transform: translateY(10px);
-      transition: opacity .5s ease, transform .5s ease;
-    }
-    .card__actions{ display:flex; gap:.5rem; flex-wrap:wrap; }
-    .card__button{
-      --glow: 0 0 10px rgba(0,247,204,.35), 0 0 24px rgba(0,247,204,.18);
-      padding:10px 12px !important; border-radius:10px !important;
-      border:1px solid rgba(0,255,170,.35) !important;
-      background:
-        linear-gradient(180deg, rgba(0,247,204,.12), rgba(0,247,204,.08) 60%, rgba(0,247,204,.16)),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.08)) !important;
-      color:#0a1916 !important; font-weight:700 !important; font-size:.72rem !important; font-family:var(--font-press) !important;
-      letter-spacing:.5px !important; text-transform:uppercase !important;
-      box-shadow: var(--glow), inset 0 0 0 1px rgba(0,255,170,.22) !important;
-      transition: transform .15s ease, box-shadow .25s ease, filter .25s ease !important;
-      opacity:0; transform: translateY(12px);
-    }
-    .card__button:hover{ filter:brightness(1.08); box-shadow:0 0 14px rgba(0,247,204,.65), 0 0 30px rgba(0,247,204,.25); }
-    .card__button:active{ transform: translateY(13px); }
-
-    /* ==========================================================
-       SMOOTH GAME-LIKE REVEAL (i.p.v. flip)
-       - zachte scan-wipe met easing
-       - glow-bar die mee scrolt
-       - staggered content fade/slide
-       ========================================================== */
-
-    /* Oude flip uitschakelen + smooth clip-path + easing */
-    .card__content{
-      transform: none !important;             /* geen rotateX */
-      opacity: 0;
-      clip-path: inset(100% 0 0 0 round 0);   /* start verborgen van boven */
-      transition:
-        clip-path .8s cubic-bezier(.22,1,.36,1),
-        opacity .45s ease,
-        background .35s ease;
-      will-change: clip-path, opacity;
-    }
-
-    /* Scanlines (zacht) + glow-bar (::before) */
-    .card__content::after{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
-      mix-blend-mode: overlay; opacity:0; transition: opacity .35s ease;
-    }
-    .card__content::before{
-      content:""; position:absolute; left:0; right:0; height:56px; top:-56px;
-      background:
-        radial-gradient(40% 100% at 50% 0%, rgba(0,247,204,.55) 0%, rgba(0,247,204,0) 70%),
-        linear-gradient(180deg, rgba(0,247,204,.35), rgba(0,247,204,.0));
-      filter: blur(8px);
-      opacity:.0; transform: translateY(0);
-      transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+      position:fixed;
+      inset:0;
+      background:#02020b;
+      z-index:9999;
       pointer-events:none;
+      overflow:hidden;
+      opacity:0;
+      transition:opacity 0.4s ease-out;
+    }
+    .page-transition.active{
+      opacity:1;
     }
 
-    /* Actieve states (hover, focus-within, keyboard toggle) */
-    .card:hover .card__content,
-    .card:focus-within .card__content,
-    .card.revealed .card__content{
-      opacity:1; clip-path: inset(0 0 0 0);
-    }
-    .card:hover .card__content::after,
-    .card:focus-within .card__content::after,
-    .card.revealed .card__content::after{
-      opacity:.32;
-    }
-    .card:hover .card__content::before,
-    .card:focus-within .card__content::before,
-    .card.revealed .card__content::before{
-      transform: translateY(100%);  /* glow-bar schuift mee naar beneden */
-      opacity:.9;
+    .transition-square{
+      position:absolute;
+      background:linear-gradient(135deg, #00f7cc, #45ffd1);
+      box-shadow:
+        0 0 20px rgba(0,247,204,0.7),
+        0 0 40px rgba(0,247,204,0.35);
+      border-radius:6px;
+      opacity:0;
+      transform:scale(0.2) rotate(3deg);
     }
 
-    /* Staggered inhoud tijdens reveal */
-    .card:hover .card__title,
-    .card:focus-within .card__title,
-    .card.revealed .card__title{
-      opacity:1; transform: translateY(0); transition-delay:.05s;
-    }
-    .card:hover .card__description,
-    .card:focus-within .card__description,
-    .card.revealed .card__description{
-      opacity:1; transform: translateY(0); transition-delay:.14s;
-    }
-    .card:hover .card__button,
-    .card:focus-within .card__button,
-    .card.revealed .card__button{
-      opacity:1; transform: translateY(0); transition-delay:.22s;
+    .page-transition.active .transition-square{
+      animation:square-pop 0.6s cubic-bezier(.22,1,.36,1) forwards;
+      animation-delay:var(--delay);
     }
 
-    /* Reduced motion: eenvoudige fade */
-    @media (prefers-reduced-motion: reduce){
-      .card__content{
-        transition: opacity .25s linear !important;
-        clip-path: inset(0 0 0 0) !important;
+    @keyframes square-pop{
+      0%{
+        opacity:0;
+        transform:scale(0.2) rotate(3deg);
       }
-      .card__content::before, .card__content::after{ display:none; }
-      .card__title, .card__description, .card__button{
-        transition: opacity .25s linear !important; transform:none !important; opacity:1 !important;
+      60%{
+        opacity:1;
+        transform:scale(1.05) rotate(0deg);
       }
-      .card__image{ transform:none !important; }
+      100%{
+        opacity:1;
+        transform:scale(1);
+      }
     }
   </style>
 </head>
 <body>
+
   <!-- MATRIX background laag -->
   <div class="matrix-container"><div class="matrix-grid"></div></div>
 
+  <!-- Vierkanten-overlay voor page transitions (naar projecten) -->
   <div class="page-transition" id="page-transition"></div>
 
   <header id="site-header">
@@ -374,7 +388,6 @@
           <span class="intro-chip">Back-end</span>
           <span class="intro-chip">UX / UI</span>
           <span class="intro-chip">3D design</span>
-          <span class="intro-chip">Prototyping</span>
         </div>
       </div>
 
@@ -413,7 +426,7 @@
         </div>
       </div>
 
-      <div class="card" data-url="todo.html" aria-label="Open TO-DO website project" tabindex="0">
+      <div class="card card--todo" data-url="todo.html" aria-label="Open TO-DO website project" tabindex="0">
         <img class="card__image" src="image/PlanYourTrip.png" alt="TO-DO website screenshot">
         <div class="card__content">
           <p class="card__title">TO-DO website</p>
@@ -461,15 +474,27 @@
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- Contact (Formspree) -->
   <section id="contact">
     <h2>Contact</h2>
-    <form id="contact-form">
-      <input type="text" placeholder="Naam" id="name" required>
-      <input type="email" placeholder="E-mail" id="email" required>
-      <textarea rows="5" placeholder="Bericht" id="message" required></textarea>
+    <form
+      id="contact-form"
+      action="https://formspree.io/f/xkgklvnl"
+      method="POST"
+    >
+      <label>
+        Naam:
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        E-mail:
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Bericht:
+        <textarea name="message" rows="5" required></textarea>
+      </label>
       <button type="submit">Verstuur</button>
-      <p id="form-message">✅ Bericht verzonden!</p>
     </form>
   </section>
 
@@ -519,12 +544,27 @@
     }, { threshold: 0.4 });
     skillObserver.observe(skillSection);
 
-    // Page transition
+    // Page transition naar projecten (vierkante explosion)
     const transition = document.getElementById("page-transition");
+    const SQUARE_COUNT = 55;
+
+    for (let i = 0; i < SQUARE_COUNT; i++) {
+      const sq = document.createElement("div");
+      sq.className = "transition-square";
+      const size = 10 + Math.random() * 12;
+      sq.style.width = size + "vmin";
+      sq.style.height = size + "vmin";
+      sq.style.left = Math.random() * 100 + "%";
+      sq.style.top = Math.random() * 100 + "%";
+      sq.style.setProperty("--delay", (Math.random() * 0.35) + "s");
+      transition.appendChild(sq);
+    }
+
     function goToPage(url) {
       transition.classList.add("active");
-      setTimeout(() => (window.location.href = url), 1000);
+      setTimeout(() => (window.location.href = url), 650);
     }
+
     document.querySelectorAll(".card").forEach(card => {
       card.addEventListener("click", e => {
         const btn = e.target.closest("[data-url]");
@@ -533,17 +573,7 @@
       });
     });
 
-    // Contactformulier feedback (dummy)
-    const form = document.getElementById("contact-form");
-    const msg = document.getElementById("form-message");
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      msg.style.opacity = "1";
-      setTimeout(() => (msg.style.opacity = "0"), 3000);
-      form.reset();
-    });
-
-    // ===== Header glassy on scroll =====
+    // Header glassy on scroll
     const header = document.getElementById('site-header');
     const toggleHeader = () => {
       if (window.scrollY > 20) header.classList.add('scrolled');
@@ -552,7 +582,7 @@
     toggleHeader();
     window.addEventListener('scroll', toggleHeader, { passive: true });
 
-    // ===== Game-like reveal via keyboard (Enter/Space) =====
+    // Game-like reveal via keyboard (Enter/Space) op cards
     document.querySelectorAll('.card').forEach(card => {
       if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
 
