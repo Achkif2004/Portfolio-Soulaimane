@@ -357,11 +357,11 @@
   <script>
     // CLOSE -> terug naar vorige pagina/positie; anders index.html
     const closeLink = document.getElementById('closeLink');
+
     closeLink.addEventListener('click', (e) => {
-      if (window.history.length > 1) {
-        e.preventDefault();
-        window.history.back();
-      }
+      e.preventDefault();
+      // altijd hard terug naar de portfolio-pagina
+      window.location.href = 'portfolio.html';
     });
 
     // section reveal
