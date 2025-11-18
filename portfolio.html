@@ -106,7 +106,7 @@
       background:#07034f76; color:#fff; border:1px solid #ddd;
     }
 
-    /* === 3D cards (carousel) === */
+    /* === 3D cards (carousel) — DESKTOP DEFAULT === */
     @keyframes autoRun3d{ from{ transform:perspective(800px) rotateY(-360deg) } to{ transform:perspective(800px) rotateY(0deg) } }
     .card-3d{
       position:relative; width:720px; height:360px; transform-style:preserve-3d;
@@ -357,9 +357,7 @@
       }
     }
 
-    /* ========== RESPONSIVE VOOR GSM ==========
-       Alles hieronder geldt voor small screens
-    ========================================= */
+    /* ========== RESPONSIVE VOOR GSM ========== */
     @media (max-width: 768px) {
 
       body{
@@ -394,6 +392,8 @@
 
       .intro-gallery{
         gap:1.5rem;
+        max-width:100%;
+        overflow:hidden; /* extra bescherming tegen horizontale scroll */
       }
 
       .intro-heading p{
@@ -410,16 +410,32 @@
         padding:0.25rem 0.5rem;
       }
 
-      /* 3D gallery kleiner */
+      /* --- 3D CARROUSEL PERFECT VOOR GSM --- */
       .card-3d{
         width:100%;
-        max-width:320px;
-        height:220px;
+        max-width:240px;           /* kleiner zodat hij netjes in gsm past */
+        height:170px;
+        margin:0 auto;
+        transform: perspective(700px) rotateY(0deg);
       }
+
       .card-3d div{
-        width:110px;
-        height:145px;
+        width:80px;
+        height:110px;
+        transform-origin:center;
       }
+
+      /* Z-afstand kleiner zodat de cirkel niet uit het scherm duwt */
+      .card-3d div:nth-child(1){ transform:translate(-50%,-50%) rotateY(0deg) translateZ(180px); }
+      .card-3d div:nth-child(2){ transform:translate(-50%,-50%) rotateY(36deg) translateZ(180px); }
+      .card-3d div:nth-child(3){ transform:translate(-50%,-50%) rotateY(72deg) translateZ(180px); }
+      .card-3d div:nth-child(4){ transform:translate(-50%,-50%) rotateY(108deg) translateZ(180px); }
+      .card-3d div:nth-child(5){ transform:translate(-50%,-50%) rotateY(144deg) translateZ(180px); }
+      .card-3d div:nth-child(6){ transform:translate(-50%,-50%) rotateY(180deg) translateZ(180px); }
+      .card-3d div:nth-child(7){ transform:translate(-50%,-50%) rotateY(216deg) translateZ(180px); }
+      .card-3d div:nth-child(8){ transform:translate(-50%,-50%) rotateY(252deg) translateZ(180px); }
+      .card-3d div:nth-child(9){ transform:translate(-50%,-50%) rotateY(288deg) translateZ(180px); }
+      .card-3d div:nth-child(10){ transform:translate(-50%,-50%) rotateY(324deg) translateZ(180px); }
 
       /* Portfolio: één kolom op gsm */
       .portfolio-grid{
