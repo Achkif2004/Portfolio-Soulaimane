@@ -96,9 +96,7 @@
     #skills h2, #portfolio h2, #contact h2 { color:#fff; }
 
     .intro{ padding:3.5rem 1.25rem; }
-    .intro-gallery{
-      max-width:1100px; margin:0 auto; text-align:center; display:grid; gap:0rem;
-    }
+    .intro-gallery{ max-width:1100px; margin:0 auto; text-align:center; display:grid; gap:0rem; }
     .intro-heading{ display:grid; gap:.5rem; justify-items:center; }
     .intro-heading h1{ margin:0; font-size:clamp(1.6rem, 2.5vw, 2.2rem); color:#fff; font-family:"Press Start 2P", system-ui; }
     .intro-heading p{ margin:0; color:#fff; max-width:70ch; line-height:1.7; font-family:"Press Start 2P", system-ui; font-size:.55rem; }
@@ -106,15 +104,6 @@
     .intro-chip{
       font-family:"Press Start 2P", system-ui; font-size:.50rem; padding:.35rem .6rem; border-radius:999px;
       background:#07034f76; color:#fff; border:1px solid #ddd;
-    }
-
-    /* === 3D foto rails container === */
-    .photo-rails{
-      max-width:100%;
-      margin:0 auto;
-      overflow:hidden;
-      display:flex;
-      justify-content:center;
     }
 
     /* === 3D cards (carousel) === */
@@ -368,7 +357,9 @@
       }
     }
 
-    /* ========== RESPONSIVE VOOR GSM ========== */
+    /* ========== RESPONSIVE VOOR GSM ==========
+       Alles hieronder geldt voor small screens
+    ========================================= */
     @media (max-width: 768px) {
 
       body{
@@ -403,8 +394,6 @@
 
       .intro-gallery{
         gap:1.5rem;
-        max-width:100%;
-        overflow:hidden;
       }
 
       .intro-heading p{
@@ -421,26 +410,15 @@
         padding:0.25rem 0.5rem;
       }
 
-      /* 👉 Op mobiel: geen 3D, maar een klein grid van foto's */
+      /* 3D gallery kleiner */
       .card-3d{
         width:100%;
         max-width:320px;
-        height:auto;
-        margin:0 auto;
-        display:grid;
-        grid-template-columns:repeat(2, 1fr);
-        gap:0.75rem;
-        transform:none;
-        animation:none;
-        transform-style:flat;
+        height:220px;
       }
-
       .card-3d div{
-        position:relative;
-        width:100%;
-        height:140px;
-        transform:none !important;
-        border-radius:8px;
+        width:110px;
+        height:145px;
       }
 
       /* Portfolio: één kolom op gsm */
