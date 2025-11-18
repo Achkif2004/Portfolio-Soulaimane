@@ -112,7 +112,7 @@
     .photo-rails{
       max-width:100%;
       margin:0 auto;
-      overflow:hidden;          /* belangrijk tegen horizontale scroll */
+      overflow:hidden;
       display:flex;
       justify-content:center;
     }
@@ -404,7 +404,7 @@
       .intro-gallery{
         gap:1.5rem;
         max-width:100%;
-        overflow:hidden; /* extra bescherming */
+        overflow:hidden;
       }
 
       .intro-heading p{
@@ -421,16 +421,26 @@
         padding:0.25rem 0.5rem;
       }
 
-      /* 3D gallery kleiner op gsm */
+      /* 👉 Op mobiel: geen 3D, maar een klein grid van foto's */
       .card-3d{
         width:100%;
-        max-width:260px;
-        height:180px;
+        max-width:320px;
+        height:auto;
         margin:0 auto;
+        display:grid;
+        grid-template-columns:repeat(2, 1fr);
+        gap:0.75rem;
+        transform:none;
+        animation:none;
+        transform-style:flat;
       }
+
       .card-3d div{
-        width:90px;
-        height:120px;
+        position:relative;
+        width:100%;
+        height:140px;
+        transform:none !important;
+        border-radius:8px;
       }
 
       /* Portfolio: één kolom op gsm */
