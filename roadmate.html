@@ -3,8 +3,52 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ===== SEO: Title & Meta Description ===== -->
+  <title>RoadMate — AI Auto-Copilot Project | Soulaimane Achkif</title>
+  <meta name="description" content="RoadMate is een AI auto-copilot die bestuurders via spraakinteractie helpt verkeersborden herkennen en veiliger rijden. Project van Soulaimane Achkif.">
+
+  <!-- ===== SEO: Canonical ===== -->
+  <link rel="canonical" href="https://soulaimaneachkif.vercel.app/roadmate.html">
+
+  <!-- ===== SEO: Favicon ===== -->
   <link rel="icon" type="image/png" href="favicon-32.png"/>
-  <title>RoadMate – Project</title>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0d0d1a">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soulaimane Achkif Portfolio">
+  <meta property="og:title" content="RoadMate — AI Auto-Copilot Project | Soulaimane Achkif">
+  <meta property="og:description" content="AI auto-copilot die bestuurders via spraakinteractie helpt verkeersborden te herkennen en veiliger te rijden.">
+  <meta property="og:url" content="https://soulaimaneachkif.vercel.app/roadmate.html">
+  <meta property="og:image" content="https://soulaimaneachkif.vercel.app/image/roadmate-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="nl_BE">
+
+  <!-- ===== Twitter / X Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RoadMate — AI Auto-Copilot Project | Soulaimane Achkif">
+  <meta name="twitter:description" content="AI auto-copilot die bestuurders via spraakinteractie helpt verkeersborden te herkennen en veiliger te rijden.">
+  <meta name="twitter:image" content="https://soulaimaneachkif.vercel.app/image/roadmate-og.jpg">
+
+  <!-- ===== Structured data ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "RoadMate",
+    "description": "AI auto-copilot die bestuurders via spraakinteractie helpt verkeersborden te herkennen en veiliger te rijden.",
+    "url": "https://soulaimaneachkif.vercel.app/roadmate.html",
+    "image": "https://soulaimaneachkif.vercel.app/image/roadmate-og.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Soulaimane Achkif",
+      "url": "https://soulaimaneachkif.vercel.app/portfolio.html"
+    }
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,6 +136,7 @@
     h1,h2{font-family:var(--press); color:var(--green)}
     h1{font-size:1.4rem; margin:0 0 1rem}
     h2{font-size:1.1rem; margin:0 0 1rem}
+    h3{font-family:var(--press); color:#7fd9ff; font-size:.85rem; margin:1.25rem 0 .6rem}
 
     .hero{display:grid; gap:1rem}
 
@@ -283,7 +328,7 @@
 
   <header>
     <div class="wrap">
-      <h1 class="brand">RoadMate</h1>
+      <p class="brand">RoadMate</p>
       <!-- CLOSE knop in juiste font/kleur; gaat terug naar de vorige positie op de homepagina -->
       <a href="portfolio.html" class="close-link" id="closeLink">CLOSE</a>
     </div>
@@ -291,7 +336,7 @@
 
   <main>
     <section class="hero" id="over">
-      <h1>AI Auto-Copilot</h1>
+      <h1>RoadMate — AI Auto-Copilot</h1>
       <p>RoadMate helpt bestuurders in real time om verkeersregels beter te begrijpen en veiliger te rijden via spraakinteractie. Met behulp van verschillende API’s detecteert RoadMate de verkeersborden in de omgeving van de gebruiker en leest deze luidop voor. Wanneer de bestuurder een verkeersbord passeert, geeft de app een korte herinnering of toelichting over de betekenis ervan. Aan het einde van de rit ontvangt de gebruiker een korte quiz met vragen over de verkeersborden en informatie die tijdens de rit werden besproken — zo wordt verkeerseducatie op een interactieve en leerrijke manier versterkt.</p>
     </section>
 
@@ -312,8 +357,28 @@
 
       <!-- Logo gecentreerd in de rechthoek -->
       <div class="imgbox">
-        <img src="image/road mate logo.png" alt="RoadMate logo">
+        <img src="image/road mate logo.png" alt="RoadMate logo" width="962" height="259" loading="lazy" decoding="async">
       </div>
+    </section>
+
+    <section id="proces">
+      <h2>Ontwerpproces &amp; technologie</h2>
+      <h3>Van idee tot prototype</h3>
+      <p>
+        RoadMate ontstond vanuit de vraag hoe je verkeerseducatie boeiender en veiliger kan maken.
+        Ik startte met een korte gebruikersanalyse om te begrijpen welke verkeersborden voor
+        beginnende bestuurders het meest verwarrend zijn. Op basis daarvan bouwde ik eerst een
+        klikbaar prototype in Figma, waarna ik de kernfunctionaliteit — spraakherkenning gekoppeld
+        aan locatie- en verkeersborden-API's — omzette naar een werkende webapplicatie.
+      </p>
+      <h3>Gebruikte technologieën</h3>
+      <p>
+        De front-end is opgebouwd met React voor een vlotte, responsieve interface, terwijl externe
+        API's instaan voor locatiebepaling en het herkennen van verkeersborden in de omgeving. De
+        spraakfeedback zorgt ervoor dat bestuurders hun ogen op de weg kunnen houden. Aan het einde
+        van elke rit genereert de app automatisch een korte quiz op basis van de borden die onderweg
+        werden gepasseerd, wat de leerervaring extra versterkt.
+      </p>
     </section>
 
     <section id="resultaat">
@@ -322,10 +387,76 @@
 
       <!-- Gallery -->
       <div class="gallery" id="gallery">
-        <div class="tile"><img src="image/roadmate mockups.png" alt="RoadMate mockup 1"></div>
-        <div class="tile"><img src="image/roadmate_gsm.jpg" alt="RoadMate mockup 2"></div>
-        <div class="tile"><img src="image/roadmate_desktop.png" alt="RoadMate mockup 3"></div>
+        <div class="tile"><img src="image/roadmate mockups.png" alt="RoadMate mockup 1" loading="lazy" decoding="async"></div>
+        <div class="tile"><img src="image/roadmate_gsm.jpg" alt="RoadMate mockup 2" loading="lazy" decoding="async"></div>
+        <div class="tile"><img src="image/roadmate_desktop.png" alt="RoadMate mockup 3" loading="lazy" decoding="async"></div>
       </div>
+    </section>
+
+    <section id="uitdagingen">
+      <h2>Uitdagingen &amp; oplossingen</h2>
+      <h3>Betrouwbare bordherkenning</h3>
+      <p>
+        Een van de grootste uitdagingen was het combineren van meerdere API's tot één betrouwbare
+        bron van verkeersinformatie. Niet elke bron leverde consistente of actuele data, waardoor ik
+        extra validatielogica moest inbouwen om tegenstrijdige of verouderde informatie te filteren.
+        Door de resultaten van verschillende bronnen te combineren en te prioriteren op basis van
+        betrouwbaarheid, kreeg de app een stabielere en preciezere herkenning van verkeersborden.
+      </p>
+      <h3>Spraak zonder afleiding</h3>
+      <p>
+        Omdat veiligheid voorop staat, moest de spraakfeedback kort, duidelijk en niet-opdringerig
+        zijn. Ik testte verschillende timing- en toonvarianten om te voorkomen dat de app de
+        bestuurder zou afleiden in plaats van ondersteunen. Uiteindelijk koos ik voor korte, neutrale
+        meldingen die enkel verschijnen wanneer dat relevant is, met de mogelijkheid om herinneringen
+        achteraf via de eindquiz te herhalen.
+      </p>
+      <h3>Testen &amp; validatie</h3>
+      <p>
+        Om zeker te zijn dat de spraakfeedback op het juiste moment verscheen, testte ik RoadMate
+        tijdens meerdere effectieve autoritten, telkens met een notitieblok bij de hand om te noteren
+        wanneer een melding te laat, te vroeg of net goed getimed was. Die iteraties op basis van
+        echte rijervaring bleken minstens even waardevol als de technische implementatie zelf, en
+        zorgden voor concrete verbeteringen aan de timing en toon van de spraakprompts. Deze manier
+        van testen in een echte context, in plaats van enkel achter een scherm, leerde me hoe groot
+        het verschil kan zijn tussen een functie die op papier goed werkt en een functie die
+        daadwerkelijk prettig aanvoelt tijdens het rijden.
+      </p>
+    </section>
+
+    <section id="doelgroep">
+      <h2>Doelgroep &amp; toepassing</h2>
+      <p>
+        RoadMate is in de eerste plaats ontworpen voor beginnende bestuurders en mensen die hun kennis
+        van verkeersborden willen opfrissen, maar de aanpak is even relevant voor rijscholen die op
+        zoek zijn naar een interactieve aanvulling op de klassieke lessen. Door de combinatie van
+        realtime spraakfeedback tijdens de rit en een korte quiz achteraf, wordt kennis niet enkel
+        gedeeld maar ook actief getoetst — wat de kans vergroot dat de informatie ook echt beklijft.
+      </p>
+      <h2>Wat ik hieruit geleerd heb</h2>
+      <p>
+        RoadMate leerde me vooral hoe belangrijk het is om technologie dienstbaar te maken aan de
+        gebruiker in plaats van andersom. Een auto-copiloot die te veel praat of verkeerde informatie
+        geeft, doet meer kwaad dan goed. Dit project versterkte mijn vaardigheden in API-integratie,
+        foutafhandeling en het ontwerpen van spraakinterfaces, en gaf me een concreet beeld van hoe AI
+        op een verantwoorde manier ingezet kan worden in een veiligheidskritische context zoals
+        verkeer. Het gaf me ook meer inzicht in hoe je een complex, technisch idee vertaalt naar een
+        eenvoudige, geruststellende gebruikerservaring.
+      </p>
+      <h2>Volgende stappen</h2>
+      <p>
+        Dit prototype vormt een goede basis, maar er zijn nog volop mogelijkheden om RoadMate verder
+        uit te bouwen. Een offline-modus zou de app bruikbaarder maken in gebieden met slechte
+        connectiviteit, en meertalige ondersteuning zou de spraakfeedback toegankelijk maken voor een
+        breder publiek van bestuurders. Ook denk ik aan een persoonlijk voortgangsprofiel, waarin
+        gebruikers over tijd kunnen zien hoe hun kennis van verkeersborden verbetert op basis van hun
+        quizresultaten, met eventueel een vergelijking tussen regio's waar verkeersregels verschillen.
+        Op langere termijn zou een samenwerking met een rijschool interessant zijn om de app in een
+        echte lesomgeving te testen: lesgevers zouden dan zelf kunnen zien welke borden voor hun
+        leerlingen het vaakst voor verwarring zorgen, en de content daarop afstemmen. Zo groeit
+        RoadMate van een persoonlijk portfolioproject naar een tool met concrete meerwaarde voor
+        rijopleidingen.
+      </p>
     </section>
   </main>
 

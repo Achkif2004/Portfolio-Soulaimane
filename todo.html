@@ -3,8 +3,52 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ===== SEO: Title & Meta Description ===== -->
+  <title>PlanYourTrip.be — To-Do Webapp Project | Soulaimane Achkif</title>
+  <meta name="description" content="PlanYourTrip.be is een PHP-gedreven to-do webapp met prioriteiten, foto-uploads en CRUD-beheer, gebouwd door Soulaimane Achkif. Bekijk het volledige project.">
+
+  <!-- ===== SEO: Canonical ===== -->
+  <link rel="canonical" href="https://soulaimaneachkif.vercel.app/todo.html">
+
+  <!-- ===== SEO: Favicon ===== -->
   <link rel="icon" type="image/png" href="favicon-32.png"/>
-  <title>PlanYourTrip.be – Project</title>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0d0d1a">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soulaimane Achkif Portfolio">
+  <meta property="og:title" content="PlanYourTrip.be — To-Do Webapp Project | Soulaimane Achkif">
+  <meta property="og:description" content="PHP-gedreven to-do webapp met prioriteiten, foto-uploads en volledig CRUD-beheer voor je persoonlijke takenlijst.">
+  <meta property="og:url" content="https://soulaimaneachkif.vercel.app/todo.html">
+  <meta property="og:image" content="https://soulaimaneachkif.vercel.app/image/todo-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="nl_BE">
+
+  <!-- ===== Twitter / X Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PlanYourTrip.be — To-Do Webapp Project | Soulaimane Achkif">
+  <meta name="twitter:description" content="PHP-gedreven to-do webapp met prioriteiten, foto-uploads en volledig CRUD-beheer voor je persoonlijke takenlijst.">
+  <meta name="twitter:image" content="https://soulaimaneachkif.vercel.app/image/todo-og.jpg">
+
+  <!-- ===== Structured data ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "PlanYourTrip.be",
+    "description": "PHP-gedreven to-do webapp met prioriteiten, foto-uploads en volledig CRUD-beheer voor je persoonlijke takenlijst.",
+    "url": "https://soulaimaneachkif.vercel.app/todo.html",
+    "image": "https://soulaimaneachkif.vercel.app/image/todo-og.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Soulaimane Achkif",
+      "url": "https://soulaimaneachkif.vercel.app/portfolio.html"
+    }
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,6 +136,7 @@
     h1,h2{font-family:var(--press); color:var(--green)}
     h1{font-size:1.4rem; margin:0 0 1rem}
     h2{font-size:1.1rem; margin:0 0 1rem}
+    h3{font-family:var(--press); color:#7fd9ff; font-size:.85rem; margin:1.25rem 0 .6rem}
 
     .hero{display:grid; gap:1rem}
 
@@ -281,7 +326,7 @@
 
   <header>
     <div class="wrap">
-      <h1 class="brand">PlanYourTrip.be</h1>
+      <p class="brand">PlanYourTrip.be</p>
       <!-- CLOSE knop in juiste font/kleur; gaat terug naar de vorige positie op de homepagina -->
       <a href="portfolio.html" class="close-link" id="closeLink">CLOSE</a>
     </div>
@@ -289,7 +334,7 @@
 
   <main>
     <section class="hero" id="over">
-      <h1>To-do planner </h1>
+      <h1>PlanYourTrip.be — To-Do Planner</h1>
       <p><strong>PlanYourTrip.be</strong> is een PHP-gedreven webapplicatie (eindwerk voor het vak Backend Development) waarmee je een persoonlijke to-do lijst samenstelt en beheert. Gebruikers kunnen taken aanmaken, prioriteiten toekennen (bijv. <em>Minder belangrijk</em>, <em>Belangrijk</em>, <em>Extreem belangrijk</em>), een beschrijving en foto toevoegen, en items afvinken zodra ze voltooid zijn. Zo blijf je overzicht houden vanaf de eerste idee tot de laatste.</p>
     </section>
 
@@ -311,8 +356,26 @@
 
       <!-- Logo gecentreerd in de rechthoek -->
       <div class="imgbox">
-        <img src="image/PlanYourTrip.png" alt="PlanYourTrip.be logo">
+        <img src="image/PlanYourTrip.webp" alt="PlanYourTrip.be logo" width="1024" height="1024" loading="lazy" decoding="async">
       </div>
+    </section>
+
+    <section id="proces">
+      <h2>Ontwikkelproces</h2>
+      <h3>Backend &amp; database</h3>
+      <p>
+        PlanYourTrip.be is gebouwd als eindwerk voor het vak Backend Development, met PHP en een
+        relationele database als fundament. Ik ontwierp het datamodel rond taken, prioriteiten en
+        bijlagen, en bouwde de volledige CRUD-functionaliteit (aanmaken, bewerken, verwijderen) zelf
+        uit, inclusief validatie en foutafhandeling.
+      </p>
+      <h3>Gebruikerservaring</h3>
+      <p>
+        Bij de interface lag de focus op overzicht: gebruikers zien in één oogopslag welke taken
+        dringend zijn dankzij het prioriteitensysteem, en kunnen snel een foto of beschrijving
+        toevoegen aan elk item. De applicatie is volledig responsief, zodat een to-do lijst even vlot
+        beheerd kan worden op desktop als onderweg op mobiel.
+      </p>
     </section>
 
     <section id="resultaat">
@@ -321,10 +384,80 @@
 
       <!-- Gallery -->
       <div class="gallery" id="gallery">
-        <div class="tile"><img src="image/TO_DO1.png" alt="Dashboard met takenoverzicht"></div>
-        <div class="tile"><img src="image/TO_DO2.png" alt="Taakdetail met beschrijving en foto"></div>
-        <div class="tile"><img src="image/TODO_3.png" alt="Mobiele view van de to-do lijst"></div>
+        <div class="tile"><img src="image/TO_DO1.png" alt="Dashboard met takenoverzicht" loading="lazy" decoding="async"></div>
+        <div class="tile"><img src="image/TO_DO2.png" alt="Taakdetail met beschrijving en foto" loading="lazy" decoding="async"></div>
+        <div class="tile"><img src="image/TODO_3.png" alt="Mobiele view van de to-do lijst" loading="lazy" decoding="async"></div>
       </div>
+    </section>
+
+    <section id="uitdagingen">
+      <h2>Uitdagingen &amp; oplossingen</h2>
+      <h3>Een datamodel dat meegroeit</h3>
+      <p>
+        Taken, prioriteiten en bijlagen leken op het eerste zicht eenvoudig te modelleren, maar zodra
+        filteren en sorteren erbij kwamen, moest de databasestructuur flexibel genoeg zijn om
+        uitbreidingen toe te laten zonder alles te herschrijven. Ik koos voor een genormaliseerd
+        datamodel met duidelijke relaties tussen taken en hun eigenschappen, wat het later ook
+        eenvoudiger maakte om filters en sorteeropties toe te voegen.
+      </p>
+      <h3>Veilig omgaan met bestanden</h3>
+      <p>
+        Foto-uploads brengen altijd extra aandachtspunten met zich mee: bestandsgrootte, toegelaten
+        formaten en het voorkomen van ongeldige of schadelijke uploads. Ik bouwde serverside validatie
+        in voor elk geüpload bestand en zorgde voor duidelijke foutmeldingen wanneer een upload niet
+        voldeed, zodat de gebruikerservaring ook bij fouten prettig blijft.
+      </p>
+    </section>
+
+    <section id="doelgroep">
+      <h2>Context &amp; doel</h2>
+      <p>
+        PlanYourTrip.be werd gebouwd als eindwerk voor het vak Backend Development, met als doel om
+        een volledig werkende PHP-applicatie met database-integratie zelfstandig te ontwikkelen —
+        van datamodel en server-logica tot een bruikbare, opgeruimde interface. Hoewel de naam
+        verwijst naar reisplanning, is de kern een generieke, herbruikbare to-do-structuur die evengoed
+        inzetbaar is voor dagelijkse taken of projectbeheer.
+      </p>
+      <h2>Wat ik hieruit geleerd heb</h2>
+      <p>
+        Dit project gaf me een grondige basis in backend-development: van het opzetten van een
+        database en het schrijven van veilige CRUD-logica, tot het bewaken van een consistente
+        gebruikerservaring doorheen de hele applicatie. Ik leerde ook hoe belangrijk foutafhandeling
+        en validatie zijn zodra echte gebruikers met een applicatie aan de slag gaan, en hoe een
+        doordacht datamodel je later veel tijd bespaart wanneer je nieuwe features wil toevoegen.
+      </p>
+      <h2>Volgende stappen</h2>
+      <p>
+        Voor een volgende versie van PlanYourTrip.be zou ik gebruikersaccounts en gedeelde
+        takenlijsten toevoegen, zodat meerdere mensen samen een reis of project kunnen plannen en
+        opvolgen. Ook een systeem van herinneringen en deadlines per taak, gekoppeld aan e-mail- of
+        pushmeldingen, zou de applicatie praktischer maken voor dagelijks gebruik in plaats van enkel
+        reisplanning. Tot slot zou ik de front-end willen moderniseren met een JavaScript-framework
+        zoals React, om de interface vlotter en dynamischer te maken zonder dat de volledige pagina
+        telkens opnieuw moet laden — een logische volgende stap nu ik met RoadMate en dit portfolio
+        al ervaring heb opgedaan met React.
+      </p>
+      <h2>Tools &amp; werkwijze</h2>
+      <p>
+        Voor de ontwikkeling van PlanYourTrip.be gebruikte ik PHP in combinatie met een
+        MySQL-database, aangestuurd via PDO voor veilige, geparametriseerde queries. Ik bouwde de
+        applicatie op volgens het MVC-principe: een duidelijke scheiding tussen de databaselaag, de
+        logica die taken verwerkt en de HTML-templates die alles tonen aan de gebruiker. Die
+        structuur maakte het makkelijker om functionaliteit stap voor stap toe te voegen zonder de
+        bestaande code te breken. Sessiebeheer zorgt ervoor dat gebruikers ingelogd blijven tijdens
+        het beheren van hun taken, en ik voorzag duidelijke server-side foutmeldingen bij ongeldige
+        invoer, zodat problemen meteen zichtbaar zijn in plaats van stil te falen. Voor het testen
+        van de applicatie werkte ik met een lokale ontwikkelomgeving, waarna de definitieve versie
+        live werd gezet op planyourtrip.be. Doorheen het hele proces lag de nadruk op een
+        pragmatische, stap-voor-stap werkwijze: eerst de kernfunctionaliteit volledig laten werken,
+        en pas daarna extra features zoals prioriteiten, foto-uploads en filters toevoegen. Die
+        aanpak zorgde ervoor dat de applicatie op elk moment in het ontwikkelproces bruikbaar en
+        stabiel bleef, ook wanneer een nieuwe feature nog niet volledig was afgewerkt, wat het testen
+        en bijsturen onderweg een pak eenvoudiger maakte. Achteraf bekeken was net die gefaseerde
+        werkwijze een van de belangrijkste redenen waarom het project op tijd en zonder grote
+        technische problemen is afgerond. Het is een werkwijze die ik sindsdien bij elk nieuw project
+        probeer toe te passen, ongeacht de grootte of complexiteit ervan.
+      </p>
     </section>
   </main>
 
