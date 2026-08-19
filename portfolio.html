@@ -3,7 +3,53 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio - Soulaimane Achkif</title>
+
+  <!-- ===== SEO: Title & Meta Description ===== -->
+  <title>Soulaimane Achkif | Portfolio Digital Experience Design</title>
+  <meta name="description" content="Portfolio van Soulaimane Achkif, student Digital Experience Design. Bekijk projecten in front-end, back-end, UX/UI-design en 3D zoals RoadMate en Ramen kiosk.">
+
+  <!-- ===== SEO: Canonical ===== -->
+  <link rel="canonical" href="https://soulaimaneachkif.vercel.app/portfolio.html">
+
+  <!-- ===== SEO: Favicon (gebaseerd op je eigen "S." logo) ===== -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0d0d1a">
+
+  <!-- ===== Open Graph (Facebook, LinkedIn, WhatsApp, ...) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soulaimane Achkif Portfolio">
+  <meta property="og:title" content="Soulaimane Achkif | Portfolio Digital Experience Design">
+  <meta property="og:description" content="Portfolio van Soulaimane Achkif, student Digital Experience Design. Bekijk projecten in front-end, back-end, UX/UI-design en 3D.">
+  <meta property="og:url" content="https://soulaimaneachkif.vercel.app/portfolio.html">
+  <meta property="og:image" content="https://soulaimaneachkif.vercel.app/image/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="nl_BE">
+
+  <!-- ===== Twitter / X Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Soulaimane Achkif | Portfolio Digital Experience Design">
+  <meta name="twitter:description" content="Portfolio van Soulaimane Achkif, student Digital Experience Design. Bekijk projecten in front-end, back-end, UX/UI-design en 3D.">
+  <meta name="twitter:image" content="https://soulaimaneachkif.vercel.app/image/og-image.jpg">
+
+  <!-- ===== Structured data (rich results) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Soulaimane Achkif",
+    "url": "https://soulaimaneachkif.vercel.app/portfolio.html",
+    "jobTitle": "Student Digital Experience Design",
+    "description": "Derdejaars student Digital Experience Design, gespecialiseerd in front-end, back-end, UX/UI-design en 3D-visualisatie.",
+    "sameAs": [
+      "https://www.linkedin.com/in/soulaimane-achkif-43a330381/"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -14,13 +60,11 @@
       --neon:#00f7cc; --neon-dim:rgba(0,247,204,.2);
       --panel:rgba(7,10,20,.78); --panel-strong:rgba(7,10,20,.92);
     }
-
     .press-start-2p-regular {
       font-family: "Press Start 2P", system-ui;
       font-weight: 400;
       font-style: normal;
     }
-
     /* ===== MATRIX BACKGROUND ===== */
     .matrix-container{
       position: fixed; inset: 0; width: 100%; height: 100%;
@@ -55,7 +99,6 @@
     }
     @keyframes borderFlow { 0% { background-position:0% 50% } 100% { background-position:200% 50% } }
     @keyframes pulse { 0% { transform:translate(-50%,-50%) scale(.85); opacity:.2 } 100% { transform:translate(-50%,-50%) scale(1.1); opacity:.5 } }
-
     /* ===== ALGEMEEN ===== */
     body{
       margin:0; font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -63,7 +106,6 @@
     }
     html { scroll-behavior:smooth; }
     a { color:#ffffff; text-decoration:none; }
-
     /* ===== NAV/HEADER ===== */
     header{
       position:sticky; top:0; z-index:1000; padding:1rem 2rem;
@@ -76,15 +118,14 @@
       backdrop-filter: blur(8px);
       box-shadow: 0 4px 24px rgba(0,0,0,.25);
     }
-
     .header-container{
       display:flex; align-items:center; justify-content:space-between;
       max-width:1200px; margin:auto;
     }
-    header h1{ margin:0; font-size:1.5rem; font-family:"Press Start 2P", system-ui; color:#fff; }
+    /* Logo/merknaam in de header is geen los kop-element meer (SEO: max. 1 H1 per pagina) */
+    .brand{ margin:0; font-size:1.5rem; font-family:"Press Start 2P", system-ui; color:#fff; }
     nav a{ margin-left:1.5rem; font-weight:bold; transition:opacity .25s; font-family:"Press Start 2P", system-ui; }
     nav a:hover{ opacity:.75; }
-
     section{
       padding:4rem 2rem; max-width:1500px; margin:auto;
       opacity:0; transform:translateY(40px); transition:all .8s ease;
@@ -93,8 +134,18 @@
     }
     section.show{ opacity:1; transform:translateY(0) }
     section h2{ text-align:center; margin-bottom:2rem; font-family:"Press Start 2P", system-ui; font-size:2rem; color:#fff; }
-    #skills h2, #portfolio h2, #contact h2 { color:#fff; }
-
+    section h3{ font-family:"Press Start 2P", system-ui; font-size:1rem; color:var(--neon); margin:1.5rem 0 .75rem; }
+    #about h2, #skills h2, #portfolio h2, #project-details h2, #contact h2 { color:#fff; }
+    #about p, #skills-intro, #contact-intro, #project-details p, .project-details-intro{ color:#fff; max-width:70ch; margin:0 auto 1rem; line-height:1.8; }
+    #about{ background:#2626454e; }
+    .about-content, .project-details-content{ max-width:900px; margin:0 auto; }
+    #project-details{ background:#2626454e; }
+    .about-avatar{
+      display:block; width:150px; height:150px; margin:0 auto 1.5rem;
+      border-radius:50%; border:3px solid var(--neon);
+      box-shadow:0 0 16px rgba(0,247,204,.45), 0 0 32px rgba(0,247,204,.2);
+      background:#0d0d1a;
+    }
     .intro{ padding:3.5rem 1.25rem; }
     .intro-gallery{ max-width:1100px; margin:0 auto; text-align:center; display:grid; gap:0rem; }
     .intro-heading{ display:grid; gap:.5rem; justify-items:center; }
@@ -105,7 +156,6 @@
       font-family:"Press Start 2P", system-ui; font-size:.50rem; padding:.35rem .6rem; border-radius:999px;
       background:#07034f76; color:#fff; border:1px solid #ddd;
     }
-
     /* === 3D cards (carousel) — DESKTOP DEFAULT === */
     @keyframes autoRun3d{ from{ transform:perspective(800px) rotateY(-360deg) } to{ transform:perspective(800px) rotateY(0deg) } }
     .card-3d{
@@ -129,11 +179,9 @@
     .card-3d div:nth-child(8){ transform:translate(-50%,-50%) rotateY(252deg) translateZ(280px); background-image:url("images_me/thailand.jpg"); }
     .card-3d div:nth-child(9){ transform:translate(-50%,-50%) rotateY(288deg) translateZ(280px); background-image:url("images_me/thailand_temple.jpg"); }
     .card-3d div:nth-child(10){ transform:translate(-50%,-50%) rotateY(324deg) translateZ(280px); background-image:url("images_me/niagara.jpg"); }
-
     /* === Portfolio grid === */
     .portfolio-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem; }
     #portfolio{ background:transparent; box-shadow:none; backdrop-filter:none; border-radius:0; }
-
     /* === Project Cards (basis) === */
     .card{
       position:relative; width:100%; aspect-ratio:16/9; background-color:#f2f2f2; border-radius:10px;
@@ -142,13 +190,11 @@
       cursor:pointer;
     }
     .card:hover{ transform: translateY(-3px); box-shadow:0 18px 40px rgba(0,0,0,.35), 0 0 0 5px #ffffff40; }
-
     .card__image{
       position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#f2f2f2;
       transition: transform .6s cubic-bezier(.22,1,.36,1);
     }
     .card:hover .card__image{ transform: scale(1.025); }
-
     .card__content{
       position:absolute; inset:0; padding:18px 18px 16px !important; box-sizing:border-box;
       transform-origin:bottom;
@@ -196,7 +242,6 @@
     }
     .card__button:hover{ filter:brightness(1.08); box-shadow:0 0 14px rgba(0,247,204,.65), 0 0 30px rgba(0,247,204,.25); }
     .card__button:active{ transform: translateY(13px); }
-
     .card:hover .card__content,
     .card:focus-within .card__content,
     .card.revealed .card__content{
@@ -243,7 +288,6 @@
     .card.revealed .card__button{
       opacity:1; transform: translateY(0); transition-delay:.22s;
     }
-
     @media (prefers-reduced-motion: reduce){
       .card__content{
         transition: opacity .25s linear !important;
@@ -255,7 +299,6 @@
       }
       .card__image{ transform:none !important; }
     }
-
     /* === Skills === */
     #skills{ padding:4rem 17rem; }
     .skills-grid{
@@ -264,7 +307,7 @@
     }
     .skill img{ width:60px; height:60px; object-fit:contain; margin-bottom:.5rem; transition: transform .3s; }
     .skill img:hover{ transform:scale(1.3); }
-
+    .skill p{ margin:.25rem 0 0; }
     .skill-bar {
       background: #150021;
       border-radius: 20px;
@@ -275,7 +318,6 @@
       position: relative;
       border: 2px solid #f0caff;
     }
-
     .skill-bar span[data-skill] {
       display: block;
       height: 100%;
@@ -284,18 +326,15 @@
       width: 0%;
       transition: width 2s ease;
     }
-
     .skill-percent {
       color: #f7eaff;
     }
-
     /* Contact */
     form{ display:grid; gap:1rem; max-width:500px; margin:auto; }
     label{ color:#fff; font-family:"Press Start 2P", system-ui; font-size:.55rem; display:grid; gap:.4rem; }
     input, textarea, button{ padding:.8rem; border:1px solid #ccc; border-radius:4px; font:inherit; }
     button{ background:#0c0b38; color:#fff; border:1px solid white; font-weight:bold; transition: transform .2s, background .3s; cursor:pointer; }
     button:hover{ background:#6d46b9; transform:scale(1.05); }
-
     /* === RETRO FOOTER === */
     .retro-footer{
       background:#0d0d0d; color:#fff; text-align:center; padding:1.5rem 1rem;
@@ -310,7 +349,6 @@
     .footer-links a:hover{ color:#aaa; }
     .footer-links a:hover::after{ transform:scaleX(1.2); }
     .retro-footer p{ margin:0; white-space:nowrap; font-size:.55rem; }
-
     /* ===== PAGE TRANSITION – MATRIX VIERKANTEN (naar projecten) ===== */
     .page-transition{
       position:fixed;
@@ -325,7 +363,6 @@
     .page-transition.active{
       opacity:1;
     }
-
     .transition-square{
       position:absolute;
       background:linear-gradient(135deg, #00f7cc, #45ffd1);
@@ -336,12 +373,10 @@
       opacity:0;
       transform:scale(0.2) rotate(3deg);
     }
-
     .page-transition.active .transition-square{
       animation:square-pop 0.6s cubic-bezier(.22,1,.36,1) forwards;
       animation-delay:var(--delay);
     }
-
     @keyframes square-pop{
       0%{
         opacity:0;
@@ -356,60 +391,47 @@
         transform:scale(1);
       }
     }
-
     /* ========== RESPONSIVE VOOR GSM ========== */
     @media (max-width: 768px) {
-
       body{
         font-size:14px;
       }
-
       header{
         padding:0.75rem 1rem;
       }
-
       .header-container{
         gap:0.5rem;
       }
-
-      header h1{
+      .brand{
         font-size:1.1rem;
       }
-
       nav a{
         margin-left:0.75rem;
         font-size:0.6rem;
       }
-
       section{
         padding:2.5rem 1.25rem;
         margin-top:1.5rem;
       }
-
       .intro{
         padding:2.8rem 1.25rem;
       }
-
       .intro-gallery{
         gap:1.5rem;
         max-width:100%;
         overflow:hidden; /* extra bescherming tegen horizontale scroll */
       }
-
       .intro-heading p{
         font-size:0.5rem;
         padding:0 0.5rem;
       }
-
       .intro-chips{
         gap:0.35rem;
       }
-
       .intro-chip{
         font-size:0.45rem;
         padding:0.25rem 0.5rem;
       }
-
       /* --- 3D CARROUSEL PERFECT VOOR GSM --- */
       .card-3d{
         width:100%;
@@ -418,13 +440,11 @@
         margin:0 auto;
         transform: perspective(700px) rotateY(0deg);
       }
-
       .card-3d div{
         width:80px;
         height:110px;
         transform-origin:center;
       }
-
       /* Z-afstand kleiner zodat de cirkel niet uit het scherm duwt */
       .card-3d div:nth-child(1){ transform:translate(-50%,-50%) rotateY(0deg) translateZ(180px); }
       .card-3d div:nth-child(2){ transform:translate(-50%,-50%) rotateY(36deg) translateZ(180px); }
@@ -436,16 +456,13 @@
       .card-3d div:nth-child(8){ transform:translate(-50%,-50%) rotateY(252deg) translateZ(180px); }
       .card-3d div:nth-child(9){ transform:translate(-50%,-50%) rotateY(288deg) translateZ(180px); }
       .card-3d div:nth-child(10){ transform:translate(-50%,-50%) rotateY(324deg) translateZ(180px); }
-
       /* Portfolio: één kolom op gsm */
       .portfolio-grid{
         grid-template-columns:1fr;
       }
-
       .card{
         aspect-ratio:16/10;
       }
-
       .card__title{
         font-size:0.8rem !important;
       }
@@ -456,71 +473,62 @@
         font-size:0.65rem !important;
         padding:8px 10px !important;
       }
-
       /* Skills blok meer ademruimte */
       #skills{
         padding:2.8rem 1.5rem;
       }
-
       .skills-grid{
         gap:1.5rem;
       }
-
       .skill img{
         width:48px;
         height:48px;
       }
-
       .skill-bar{
         width:100%;
       }
-
       /* Contact labels iets kleiner */
       label{
         font-size:0.5rem;
       }
-
       /* Footer stacken */
       .retro-footer{
         font-size:0.45rem;
       }
-
       .footer-container{
         flex-direction:column;
         align-items:flex-start;
         gap:0.75rem;
       }
-
       .footer-links{
         gap:1.5rem;
       }
     }
-
   </style>
 </head>
 <body>
-
   <!-- MATRIX background laag -->
   <div class="matrix-container"><div class="matrix-grid"></div></div>
-
   <!-- Vierkanten-overlay voor page transitions (naar projecten) -->
   <div class="page-transition" id="page-transition"></div>
-
   <header id="site-header">
     <div class="header-container">
-      <h1>Soulaimane Achkif</h1>
+      <p class="brand">Soulaimane Achkif</p>
       <nav>
         <a href="#home">Home</a>
+        <a href="#about">Over mij</a>
+        <a href="#portfolio">Projecten</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- Intro — foto/3D zone -->
+  <!-- Intro — foto/3D zone (bevat de enige H1 van de pagina) -->
   <section id="home" class="intro">
     <div class="intro-gallery">
       <div class="intro-heading">
-        <h1>Hi, ik ben Soulaimane </h1>
+        <h1>Hi, ik ben Soulaimane</h1>
         <p>Derdejaars <em>Digital Experience Design</em> student. Ik bouw gebruiksvriendelijke digitale ervaringen,
           combineer creativiteit met techniek en leer graag door te maken.</p>
         <div class="intro-chips">
@@ -530,7 +538,6 @@
           <span class="intro-chip">3D design</span>
         </div>
       </div>
-
       <div class="photo-rails">
         <div class="card-3d">
           <div></div><div></div><div></div><div></div><div></div>
@@ -540,37 +547,80 @@
     </div>
   </section>
 
+  <!-- Over mij — extra tekstuele content voor SEO en context -->
+  <section id="about">
+    <h2>Over mij</h2>
+    <div class="about-content">
+      <img class="about-avatar" src="image/profiel_foto-removebg-preview.png" alt="Illustratie-avatar van Soulaimane Achkif" width="150" height="150" loading="lazy" decoding="async">
+      <h3>Wie ben ik?</h3>
+      <p>
+        Ik ben Soulaimane Achkif, een derdejaars student Digital Experience Design in België.
+        Digital Experience Design is een opleiding waarin front-end en back-end development,
+        UX/UI-design en 3D-visualisatie samenkomen. Die combinatie spreekt me enorm aan: ik hou ervan
+        om een idee helemaal zelf uit te werken, van de eerste schets en gebruikersflow tot de
+        uiteindelijke, werkende website of applicatie.
+      </p>
+      <h3>Mijn aanpak</h3>
+      <p>
+        Voor elk project begin ik met de gebruiker: wat wil die bereiken, en hoe maak ik dat pad zo
+        eenvoudig en aangenaam mogelijk? Daarna vertaal ik dat naar een technische oplossing. Ik werk
+        graag met HTML, CSS en JavaScript aan de front-end, ondersteund door PHP en React voor meer
+        dynamische functionaliteit. Voor het ontwerp gebruik ik Figma om prototypes en visuele
+        concepten uit te werken, en met Blender maak ik 3D-modellen en renders die een project net dat
+        extra tikje realisme en sfeer geven.
+      </p>
+      <h3>Waarom dit portfolio?</h3>
+      <p>
+        Deze portfolio-website toont een selectie van projecten waar ik het afgelopen jaar aan heb
+        gewerkt: van een AI-copiloot voor autobestuurders, over een sfeervolle 3D-render van een
+        Japanse ramenkiosk, tot een overzichtelijke TO-DO-webapplicatie. Elk project leerde me iets
+        nieuws over interactiedesign, code-structuur of visuele storytelling. Scroll gerust verder om
+        mijn vaardigheden en projecten te bekijken, of neem contact met me op via het formulier
+        onderaan de pagina.
+      </p>
+      <h3>Opleiding &amp; toekomstplannen</h3>
+      <p>
+        Naast mijn opleiding Digital Experience Design werk ik voortdurend aan side-projects om nieuwe
+        technologieën te verkennen, zoals moderne CSS-animaties, 3D-interacties in de browser en
+        toegankelijke formulieren. Ik vind het belangrijk dat een website niet alleen visueel
+        aantrekkelijk is, maar ook snel laadt, goed werkt op mobiel en toegankelijk is voor iedereen.
+        Op termijn wil ik doorgroeien naar een rol waarin front-end development en UX-design samenkomen,
+        zodat ik zowel de technische implementatie als de gebruikerservaring van een product in handen
+        kan nemen. Ben je op zoek naar een gemotiveerde stagiair of freelancer voor een front-end,
+        UX- of 3D-project? Neem gerust contact met me op via het formulier onderaan deze pagina.
+      </p>
+    </div>
+  </section>
+
   <!-- Projecten — cards -->
   <section id="portfolio">
     <h2>Projecten</h2>
     <div class="portfolio-grid">
       <div class="card" data-url="roadmate.html" aria-label="Open RoadMate project" tabindex="0">
-        <img class="card__image" src="image/road mate logo.png" alt="RoadMate logo">
+        <img class="card__image" src="image/road mate logo.png" alt="RoadMate logo" width="160" height="160" loading="lazy" decoding="async">
         <div class="card__content">
-          <p class="card__title">RoadMate</p>
-          <p class="card__description">🚗 AI Auto-Copilot die bestuurders in realtime helpt verkeersregels te begrijpen en veilig rijgedrag te verbeteren via spraakinteractie.</p>
+          <h3 class="card__title">RoadMate</h3>
+          <p class="card__description">🚗 AI Auto-Copilot die bestuurders in realtime helpt verkeersregels te begrijpen en veilig rijgedrag te verbeteren via spraakinteractie. Gebouwd met focus op een intuïtieve, afleidingsvrije interface.</p>
           <div class="card__actions">
             <button class="card__button" data-url="roadmate.html">Bekijk project</button>
           </div>
         </div>
       </div>
-
       <div class="card" data-url="ramen-kiosk.html" aria-label="Open 3D Ramen kiosk project" tabindex="0">
-        <img class="card__image" src="image/Ramen_kiosk.png" alt="3D Ramen kiosk render">
+        <img class="card__image" src="image/Ramen_kiosk.jpg" alt="3D Ramen kiosk render" width="160" height="160" loading="lazy" decoding="async">
         <div class="card__content">
-          <p class="card__title">3D Ramen kiosk</p>
-          <p class="card__description">Sfeervolle 3D-weergave van een traditionele Japanse ramen kiosk in Blender, met realistische materialen en verlichting. 🍜</p>
+          <h3 class="card__title">3D Ramen kiosk</h3>
+          <p class="card__description">Sfeervolle 3D-weergave van een traditionele Japanse ramen kiosk, gemodelleerd in Blender met realistische materialen en verlichting voor een warme, filmische sfeer. 🍜</p>
           <div class="card__actions">
             <button class="card__button" data-url="ramen-kiosk.html">Bekijk project</button>
           </div>
         </div>
       </div>
-
       <div class="card card--todo" data-url="todo.html" aria-label="Open TO-DO website project" tabindex="0">
-        <img class="card__image" src="image/PlanYourTrip.png" alt="TO-DO website screenshot">
+        <img class="card__image" src="image/PlanYourTrip.webp" alt="TO-DO website logo" width="160" height="160" loading="lazy" decoding="async">
         <div class="card__content">
-          <p class="card__title">TO-DO website</p>
-          <p class="card__description">Gebruiksvriendelijke TO-DO site met een cleane UI en focus op productiviteit en eenvoud. ✅</p>
+          <h3 class="card__title">TO-DO website</h3>
+          <p class="card__description">Gebruiksvriendelijke TO-DO site met een cleane UI en focus op productiviteit, duidelijke visuele hiërarchie en eenvoud in het dagelijks gebruik. ✅</p>
           <div class="card__actions">
             <button class="card__button" data-url="todo.html">Bekijk project</button>
           </div>
@@ -579,36 +629,81 @@
     </div>
   </section>
 
+  <!-- Projecten in detail — extra context per project (SEO + gebruikswaarde) -->
+  <section id="project-details">
+    <h2>Projecten in detail</h2>
+    <div class="project-details-content">
+      <p class="project-details-intro">
+        Wil je meer weten over de projecten hierboven? Hieronder geef ik voor elk project wat meer
+        context: de aanpak, de gebruikte tools en de belangrijkste designkeuzes.
+      </p>
+      <h3>RoadMate — AI Auto-Copilot</h3>
+      <p>
+        RoadMate is een concept voor een AI-gestuurde copiloot die bestuurders in real time ondersteunt
+        tijdens het rijden. De focus lag op spraakinteractie: bestuurders kunnen vragen stellen over
+        verkeersregels of een situatie op de weg, zonder hun ogen van de weg te moeten halen. Bij het
+        ontwerp hield ik rekening met afleiding achter het stuur, wat resulteerde in een minimalistische
+        interface met grote, duidelijke elementen en een spraakgestuurde flow. Dit project combineerde
+        UX-research, interactiedesign en het opzetten van een realistische gebruikersflow voor een
+        AI-toepassing in de automotive sector.
+      </p>
+      <h3>3D Ramen kiosk</h3>
+      <p>
+        Voor dit project bouwde ik in Blender een volledige 3D-scène van een traditionele Japanse
+        ramenkiosk. Ik werkte aan modellering, UV-mapping, materialen en belichting om een warme,
+        filmische sfeer te creëren die de Japanse straatcultuur weerspiegelt. Het project draaide vooral
+        om compositie en licht: door zachte, warme lichtbronnen te combineren met subtiele reflecties en
+        schaduwen, kreeg de render een uitnodigende, bijna tastbare uitstraling. Dit was een goede
+        oefening in het vertalen van een sfeer en verhaal naar een puur visueel, driedimensionaal
+        eindresultaat.
+      </p>
+      <h3>TO-DO website</h3>
+      <p>
+        De TO-DO website is een lichte, snelle webapplicatie waarmee gebruikers taken kunnen aanmaken,
+        afvinken en organiseren. Bij dit project lag de nadruk op eenvoud: een opgeruimde interface,
+        duidelijke visuele hiërarchie en snelle interacties zonder onnodige clicks. Ik werkte de
+        front-end uit met HTML, CSS en JavaScript, met aandacht voor toegankelijkheid en responsief
+        gedrag op zowel desktop als mobiel. Het resultaat is een productiviteitstool die doet wat hij
+        moet doen, zonder afleiding.
+      </p>
+    </div>
+  </section>
+
   <!-- Skills -->
   <section id="skills">
     <h2>Skills</h2>
+    <p id="skills-intro">
+      Hieronder een overzicht van de technologieën en tools waar ik dagelijks mee werk, van
+      front-end code tot 3D-design. De percentages geven een inschatting van mijn ervaring en
+      vertrouwdheid met elke tool, opgebouwd tijdens schoolprojecten, stages en eigen experimenten.
+    </p>
     <div class="skills-grid">
       <div class="skill">
-        <img src="image/html.svg" alt="HTML"><p>HTML</p>
+        <img src="image/html.svg" alt="HTML logo" width="60" height="60" loading="lazy"><p>HTML</p>
         <div class="skill-bar"><span data-skill="100"></span><span class="skill-percent">0%</span></div>
       </div>
       <div class="skill">
-        <img src="image/css.svg" alt="CSS"><p>CSS</p>
+        <img src="image/css.svg" alt="CSS logo" width="60" height="60" loading="lazy"><p>CSS</p>
         <div class="skill-bar"><span data-skill="90"></span><span class="skill-percent">0%</span></div>
       </div>
       <div class="skill">
-        <img src="image/js.svg" alt="JavaScript"><p>JavaScript</p>
+        <img src="image/js.svg" alt="JavaScript logo" width="60" height="60" loading="lazy"><p>JavaScript</p>
         <div class="skill-bar"><span data-skill="85"></span><span class="skill-percent">0%</span></div>
       </div>
       <div class="skill">
-        <img src="image/php.svg" alt="PHP"><p>PHP</p>
+        <img src="image/php.svg" alt="PHP logo" width="60" height="60" loading="lazy"><p>PHP</p>
         <div class="skill-bar"><span data-skill="70"></span><span class="skill-percent">0%</span></div>
       </div>
       <div class="skill">
-        <img src="image/react.svg" alt="React"><p>React</p>
+        <img src="image/react.svg" alt="React logo" width="60" height="60" loading="lazy"><p>React</p>
         <div class="skill-bar"><span data-skill="70"></span><span class="skill-percent">0%</span></div>
       </div>
       <div class="skill">
-        <img src="image/figma.svg" alt="Figma"><p>Figma</p>
+        <img src="image/figma.svg" alt="Figma logo" width="60" height="60" loading="lazy"><p>Figma</p>
         <div class="skill-bar"><span data-skill="90"></span><span class="skill-percent">0%</span></div>
       </div>
       <div class="skill">
-        <img src="image/blender.svg" alt="Blender"><p>Blender</p>
+        <img src="image/blender.svg" alt="Blender logo" width="60" height="60" loading="lazy"><p>Blender</p>
         <div class="skill-bar"><span data-skill="80"></span><span class="skill-percent">0%</span></div>
       </div>
     </div>
@@ -617,6 +712,11 @@
   <!-- Contact (Formspree) -->
   <section id="contact">
     <h2>Contact</h2>
+    <p id="contact-intro">
+      Heb je een vraag, een samenwerkingsidee of gewoon zin om te connecteren? Vul het formulier
+      hieronder in en ik antwoord zo snel mogelijk, of neem een kijkje op mijn LinkedIn-profiel
+      onderaan de pagina.
+    </p>
     <form
       id="contact-form"
       action="https://formspree.io/f/xkgklvnl"
@@ -641,7 +741,7 @@
   <footer class="retro-footer">
     <div class="footer-container">
       <div class="footer-links">
-        <a href="https://www.linkedin.com/in/soulaimane-achkif-43a330381/" target="_blank">LINKEDIN</a>
+        <a href="https://www.linkedin.com/in/soulaimane-achkif-43a330381/" target="_blank" rel="noopener">LINKEDIN</a>
       </div>
       <p>© 2025 Soulaimane Achkif. Built with care in Belgium.</p>
     </div>
@@ -654,7 +754,6 @@
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("show"); });
     }, { threshold: 0.2 });
     sections.forEach(sec => observer.observe(sec));
-
     // Skills animatie
     const skillSection = document.querySelector("#skills");
     const skillBars = document.querySelectorAll(".skill-bar span[data-skill]");
@@ -682,11 +781,9 @@
       });
     }, { threshold: 0.4 });
     skillObserver.observe(skillSection);
-
     // Page transition naar projecten (vierkante explosion)
     const transition = document.getElementById("page-transition");
     const SQUARE_COUNT = 55;
-
     for (let i = 0; i < SQUARE_COUNT; i++) {
       const sq = document.createElement("div");
       sq.className = "transition-square";
@@ -698,12 +795,10 @@
       sq.style.setProperty("--delay", (Math.random() * 0.35) + "s");
       transition.appendChild(sq);
     }
-
     function goToPage(url) {
       transition.classList.add("active");
       setTimeout(() => (window.location.href = url), 650);
     }
-
     document.querySelectorAll(".card").forEach(card => {
       card.addEventListener("click", e => {
         const btn = e.target.closest("[data-url]");
@@ -711,7 +806,6 @@
         if (url) goToPage(url);
       });
     });
-
     // Header glassy on scroll
     const header = document.getElementById('site-header');
     const toggleHeader = () => {
@@ -720,18 +814,15 @@
     };
     toggleHeader();
     window.addEventListener('scroll', toggleHeader, { passive: true });
-
     // Game-like reveal via keyboard (Enter/Space) op cards
     document.querySelectorAll('.card').forEach(card => {
       if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
-
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           card.classList.toggle('revealed');
         }
       });
-
       card.addEventListener('mouseleave', () => card.classList.remove('revealed'));
       card.addEventListener('focusout', (e) => {
         if (!card.contains(e.relatedTarget)) card.classList.remove('revealed');
