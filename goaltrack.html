@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TLPD8S53');</script>
+<!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ===== SEO: Title & Meta Description ===== -->
+  <title>GoalTrack — Doelen tracker | Soulaimane Achkif</title>
+  <meta name="description" content="GoalTrack is een side-project van Soulaimane Achkif: een lichte, client-side doelen-tracker gebouwd met vanilla JavaScript en localStorage, zonder backend.">
+
+  <!-- ===== SEO: Canonical ===== -->
+  <link rel="canonical" href="https://soulaimaneachkif.vercel.app/goaltrack.html">
+
+  <!-- ===== SEO: Favicon ===== -->
+  <link rel="icon" type="image/png" href="favicon-32.png"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0d0d1a">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soulaimane Achkif Portfolio">
+  <meta property="og:title" content="GoalTrack — Doelen tracker | Soulaimane Achkif">
+  <meta property="og:description" content="Een lichte, client-side doelen-tracker gebouwd met vanilla JavaScript en localStorage — mijn eigen P.E.T.-project, los van schoolopdrachten.">
+  <meta property="og:url" content="https://soulaimaneachkif.vercel.app/goaltrack.html">
+  <meta property="og:image" content="https://soulaimaneachkif.vercel.app/image/goaltrack-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="nl_BE">
+
+  <!-- ===== Twitter / X Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GoalTrack — Doelen tracker | Soulaimane Achkif">
+  <meta name="twitter:description" content="Een lichte, client-side doelen-tracker gebouwd met vanilla JavaScript en localStorage.">
+  <meta name="twitter:image" content="https://soulaimaneachkif.vercel.app/image/goaltrack-og.jpg">
+
+  <!-- ===== Structured data ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "GoalTrack",
+    "description": "Een lichte, client-side doelen-tracker gebouwd met vanilla JavaScript en localStorage.",
+    "url": "https://soulaimaneachkif.vercel.app/goaltrack.html",
+    "image": "https://soulaimaneachkif.vercel.app/image/goaltrack-og.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "Soulaimane Achkif",
+      "url": "https://soulaimaneachkif.vercel.app/portfolio.html"
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --press: "Press Start 2P", system-ui, sans-serif;
+      --green: #0F790A;
+      --green-light: #56D64F;
+      --card-bg: #2626454e;
+      --glass-b: rgba(255,255,255,.08);
+    }
+
+    /* ===== Matrix background (zelfde stijl als de andere projectpagina's) ===== */
+    .matrix-container{
+      position: fixed; inset: 0; width:100%; height:100%;
+      perspective:1500px; background:#0d0d1a; overflow:hidden; z-index:-1; pointer-events:none;
+    }
+    .matrix-grid{
+      width:100%; height:100%;
+      background:
+        linear-gradient(#262645 1px, transparent 1px),
+        linear-gradient(90deg, #262645 1px, transparent 1px),
+        repeating-linear-gradient(45deg, rgba(0,255,170,0.05) 0px 1px, transparent 1px 12px),
+        repeating-linear-gradient(-45deg, rgba(0,255,170,0.05) 0px 1px, transparent 1px 12px),
+        radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
+      background-size:28px 28px,28px 28px,50px 50px,50px 50px,cover;
+      border:1px solid rgba(0,255,170,0.1);
+      box-shadow: inset 0 0 40px rgba(0,255,170,0.1), 0 0 60px rgba(0,255,170,0.15);
+      transform-style:preserve-3d; position:relative;
+    }
+    .matrix-grid::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent, rgba(0,255,170,0.4), transparent);
+      animation:borderFlow 6s linear infinite; pointer-events:none;
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+    @keyframes borderFlow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    /* ===== Global ===== */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color:#eee; background:transparent; line-height:1.6
+    }
+    a{text-decoration:none}
+
+    /* ===== Header / Nav ===== */
+    header{
+      position:sticky; top:0; z-index:1000; padding:1rem 2rem;
+      border-bottom:1px solid #2b2b48; backdrop-filter: blur(6px);
+    }
+    .wrap{
+      max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      font-family:var(--press); color:var(--green-light); font-size:1rem; margin:0;
+    }
+    .close-link{
+      font-family:var(--press); color:var(--green-light);
+      font-size:.8rem; padding:.4rem .6rem; border:1px solid #2b2b48; border-radius:8px;
+      background: rgba(255,255,255,0.04);
+    }
+    .close-link:hover{ opacity:.85; }
+
+    /* ===== Layout ===== */
+    main{max-width:1100px; margin:0 auto; padding:2rem 1rem}
+    section{
+      background: var(--card-bg);
+      border-radius:12px; backdrop-filter: blur(3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      padding:2rem; margin: 1.5rem 0;
+      opacity:0; transform: translateY(30px); transition: .7s ease;
+    }
+    section.show{opacity:1; transform: translateY(0)}
+    h1,h2{font-family:var(--press); color:var(--green-light)}
+    h1{font-size:1.4rem; margin:0 0 1rem}
+    h2{font-size:1.1rem; margin:0 0 1rem}
+    h3{font-family:var(--press); color:#7fd9ff; font-size:.85rem; margin:1.25rem 0 .6rem}
+
+    .hero{display:grid; gap:1rem}
+
+    .grid-2{display:grid; gap:1rem; grid-template-columns:1fr; }
+    @media (min-width:900px){ .grid-2{grid-template-columns:1.1fr .9fr} }
+
+    .imgbox{
+      border:1px solid #2b2b48; border-radius:10px; overflow:hidden; background:#0d0d1a;
+      display:flex; align-items:center; justify-content:center; min-height:200px;
+    }
+    .imgbox img{
+      display:block; max-width:80%; max-height:220px; height:auto; width:auto; object-fit:contain;
+    }
+
+    .btns{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.5rem}
+    .btn{
+      font-family:var(--press); color:#0d0d1a; background:var(--green-light);
+      padding:.6rem .8rem; border-radius:8px; font-size:.65rem; display:inline-block;
+      border:none; cursor:pointer;
+    }
+    .btn.secondary{ background:transparent; color:var(--green-light); border:1px solid var(--green-light); }
+
+    /* ===== Resultaat: gallery tiles ===== */
+    .gallery{
+      display:grid; gap:1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .tile{
+      position:relative; border:1px solid #2b2b48; border-radius:12px; overflow:hidden;
+      background:#0d0d1a; cursor: zoom-in;
+    }
+    .tile img{display:block; width:100%; height:100%; object-fit:cover; aspect-ratio: 16/10; transition: transform .5s ease}
+    .tile::after{
+      content:"Klik om te bekijken";
+      position:absolute; left:0; right:0; bottom:0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      color:#cfead0; font-family:var(--press); font-size:.55rem;
+      padding:.6rem .8rem; opacity:0; transform: translateY(10px); transition:.35s ease;
+    }
+    .tile:hover img{transform: scale(1.05)}
+    .tile:hover::after{opacity:1; transform: translateY(0)}
+
+    /* ===== Lightbox ===== */
+    .lightbox{
+      position: fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(0,0,0,.75);
+      z-index: 10000;
+      backdrop-filter: blur(3px);
+    }
+    .lightbox.open{display:flex}
+
+    .lb-frame{
+      position:relative; max-width:min(1100px, 92vw); max-height: 86vh;
+      border:1px solid var(--glass-b); background: rgba(12,12,22,.6);
+      border-radius:14px; overflow:hidden; box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+    .lb-img{
+      display:block; max-width:100%; max-height:86vh; width:auto; height:auto; object-fit:contain; background:#0d0d1a;
+      z-index: 1;
+    }
+
+    .lb-close{
+      position:absolute; top:.6rem; right:.6rem; width:38px; height:38px;
+      display:grid; place-items:center; border-radius:10px; border:1px solid var(--glass-b);
+      background: rgba(5, 4, 4, 0.04); color:#fff; cursor:pointer; font-size:20px;
+      backdrop-filter: blur(4px);
+      z-index: 5;
+    }
+    .lb-close:hover{background: rgba(255,255,255,.08)}
+
+    .lb-arrow{
+      position:absolute; top:50%; transform: translateY(-50%);
+      width:52px; height:52px; display:grid; place-items:center; border-radius:12px;
+      border:1px solid var(--glass-b);
+      background: rgba(39, 39, 39, 0.782); color:rgba(38, 176, 31, 0.776); cursor:pointer; font-size:20px;
+      user-select:none;
+      z-index: 4;
+    }
+    .lb-prev{ left:.6rem }
+    .lb-next{ right:.6rem }
+    .lb-arrow:hover{ background: rgba(255,255,255,.12) }
+
+    /* clickable sides for navigation (big hit areas) */
+    .lb-hit{
+      position:absolute; top:0; bottom:0; width:50%;
+      z-index: 3;
+    }
+    .lb-hit.left{ left:0 }
+    .lb-hit.right{ right:0 }
+
+    /* ========== RESPONSIVE – TABLET & GSM ========== */
+    @media (max-width: 900px){
+      main{ padding:1.5rem 1rem; }
+      section{ padding:1.5rem 1.1rem; margin:1rem 0; }
+      h1{ font-size:1.25rem; }
+      h2{ font-size:1rem; }
+      .hero p{ font-size:0.95rem; }
+    }
+
+    @media (max-width: 768px){
+      body{ font-size:14px; }
+      header{ padding:0.75rem 1rem; }
+      .wrap{ max-width:100%; }
+      .brand{ font-size:0.9rem; }
+      .close-link{ font-size:0.65rem; padding:0.35rem 0.55rem; }
+      .grid-2{ grid-template-columns:1fr; }
+      .imgbox{ min-height:200px; }
+      .btns{ gap:0.4rem; }
+      .btn{ font-size:0.6rem; padding:0.5rem 0.7rem; }
+      .gallery{ grid-template-columns:1fr; }
+      .lb-arrow{ width:40px; height:40px; font-size:18px; }
+      .lb-close{ width:32px; height:32px; font-size:18px; }
+    }
+
+    @media (max-width: 480px){
+      header{ padding:0.6rem 0.8rem; }
+      main{ padding:1.2rem 0.8rem; }
+      h1{ font-size:1.15rem; }
+      .hero p{ font-size:0.9rem; }
+      .tile::after{ font-size:0.5rem; padding:0.5rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLPD8S53"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+  <!-- matrix bg -->
+  <div class="matrix-container"><div class="matrix-grid"></div></div>
+
+  <header>
+    <div class="wrap">
+      <p class="brand">GoalTrack</p>
+      <a href="portfolio.html" class="close-link" id="closeLink">CLOSE</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="over">
+      <h1>GoalTrack — Doelen tracker</h1>
+      <p><strong>GoalTrack</strong> is een eigen side-project: een lichte, client-side webapp waarmee je persoonlijke doelen aanmaakt, opdeelt in een percentage voortgang, en opvolgt tot ze afgerond zijn. Geen backend, geen account nodig — alles wordt lokaal in je browser bijgehouden via <code>localStorage</code>. Dit project staat volledig los van mijn schoolopdrachten: ik startte het zelf op omdat ik zelf nood had aan een simpel overzicht van mijn eigen doelen (stage zoeken, portfolio afwerken, nieuwe skills leren, ...), en omdat mijn portfolio tot nu toe alleen schoolprojecten bevatte. In tegenstelling tot mijn schoolprojecten draait GoalTrack als een volledig eigen, apart gehoste website, met haar eigen GitHub-repository en Vercel-deployment.</p>
+    </section>
+
+    <section class="grid-2" id="features">
+      <div>
+        <h2>Belangrijkste features</h2>
+        <ul>
+          <li>Doelen aanmaken met titel, categorie en optionele streefdatum.</li>
+          <li>Voortgang per doel bijhouden via een percentage-slider (0–100%).</li>
+          <li>Automatisch als "voltooid" markeren zodra een doel 100% bereikt.</li>
+          <li>Filteren op Alle / Actief / Voltooid.</li>
+          <li>Alles blijft bewaard tussen bezoeken dankzij <code>localStorage</code> — geen server nodig.</li>
+        </ul>
+        <div class="btns">
+          <a href="https://goaltrack-weld.vercel.app/" class="btn" target="_blank" rel="noopener">Website</a>
+          <a href="https://github.com/Achkif2004/GoalTrack" class="btn" target="_blank" rel="noopener">Repository</a>
+        </div>
+      </div>
+      <div class="imgbox">
+        <img src="image/GoalTrack.png" alt="GoalTrack logo" width="1024" height="1024" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <section id="resultaat">
+      <h2>Resultaat</h2>
+      <p>GoalTrack draait als volledig eigen, apart gehoste website (niet ingebed in dit portfolio) — klik hierboven op "Website" om de live, werkende tracker zelf uit te proberen. Hieronder enkele schermafbeeldingen van het eindresultaat en het ontwikkelproces:</p>
+
+      <div class="gallery" id="gallery">
+        <div class="tile"><img src="image/GoalTrack_1.jpg" alt="GoalTrack homepagina met introductie en features" loading="lazy" decoding="async"></div>
+        <div class="tile"><img src="image/GoalTrack_2.jpg" alt="Werkende tracker met drie doelen en voortgang" loading="lazy" decoding="async"></div>
+        <div class="tile"><img src="image/GoalTrack_3.jpg" alt="Commit-geschiedenis van de GoalTrack GitHub-repository" loading="lazy" decoding="async"></div>
+      </div>
+    </section>
+
+    <section id="proces">
+      <h2>Ontwikkelproces</h2>
+      <h3>Waarom een side-project, en waarom dit?</h3>
+      <p>
+        Bij het herbekijken van mijn portfolio viel op dat de drie bestaande projecten (RoadMate,
+        3D Ramen kiosk, TO-DO website) stuk voor stuk schoolopdrachten zijn. Om mijn portfolio niet
+        alleen schoolprojecten te laten tonen, koos ik voor iets kleins dat ik volledig zelf kon
+        opzetten, bedenken en afwerken: een minimalistische doelen-tracker. Geen ingewikkeld idee,
+        maar wel een volledig eigen, werkend product — van concept tot live deployment.
+      </p>
+      <h3>Front-end &amp; opslag</h3>
+      <p>
+        GoalTrack is bewust eenvoudig gehouden: pure HTML, CSS en vanilla JavaScript, zonder framework
+        of build-stap, en zonder backend. Elke actie (doel toevoegen, voortgang aanpassen, verwijderen,
+        filteren) wordt meteen weggeschreven naar <code>localStorage</code> als JSON, en bij het laden
+        van de pagina wordt die JSON terug ingelezen om de lijst te herbouwen. Dat maakt de tool
+        volledig client-side en dus makkelijk te hosten als statische pagina.
+      </p>
+      <h3>Van ingebed naar een echte, aparte website</h3>
+      <p>
+        GoalTrack begon als een pagina binnenin dit portfolio. Na verder nadenken besefte ik dat een
+        side-project pas echt op zichzelf staat als het ook technisch volledig gescheiden is: een eigen
+        GitHub-repository, een eigen Vercel-deployment en een eigen domein, los van de portfolio-code.
+        Daarom bouwde ik GoalTrack opnieuw als volledig zelfstandige website (<a href="https://github.com/Achkif2004/GoalTrack" target="_blank" rel="noopener" style="color:#7fd9ff">github.com/Achkif2004/GoalTrack</a>),
+        zette die zelf live via Vercel, en deze pagina hier in het portfolio is enkel nog een
+        verwijzing ernaartoe — net zoals bij mijn andere externe project, PlanYourTrip.be.
+      </p>
+    </section>
+
+    <section id="uitdagingen">
+      <h2>Uitdagingen &amp; oplossingen</h2>
+      <h3>Voortgang bijhouden zonder complexiteit</h3>
+      <p>
+        Ik overwoog eerst een systeem met losse subtaken per doel (zoals een checklist), maar dat
+        maakte de interface meteen een stuk complexer. Ik koos bewust voor een simpele
+        percentage-voortgang per doel: minder flexibel dan losse subtaken, maar veel sneller te
+        gebruiken en genoeg om echt bij te houden hoe ver ik sta.
+      </p>
+      <h3>State consistent houden met localStorage</h3>
+      <p>
+        Omdat er geen backend is, moest ik zelf zorgen dat de lijst van doelen in de UI altijd exact
+        overeenkomt met wat er in <code>localStorage</code> staat, ook na toevoegen, aanpassen en
+        verwijderen. Ik loste dat op met één centrale <code>render()</code>-functie die telkens de
+        volledige lijst opnieuw opbouwt vanuit de opgeslagen data, in plaats van de DOM stukje bij
+        beetje bij te werken — minder foutgevoelig, ook al is het iets minder performant dan een
+        volledig reactief systeem.
+      </p>
+      <h3>Een tweede keer opzetten als aparte site</h3>
+      <p>
+        Nadat ik besefte dat GoalTrack een volledig eigen website moest worden, moest ik de assets
+        (logo, favicon, OG-afbeelding) en de app-code herbruiken in een nieuwe, losstaande repository,
+        en zelf een nieuw Vercel-project opzetten en deployen. Dat leerde me hoe een klein project in
+        de praktijk overgaat van "onderdeel van iets groters" naar een écht zelfstandig, live product
+        met zijn eigen adres op het internet.
+      </p>
+    </section>
+
+    <section id="doelgroep">
+      <h2>Context &amp; doel</h2>
+      <p>
+        GoalTrack maakt deel uit van de "P.E.T. Projects"-challenge van het vak Create: Digital
+        products: eigen, niet-opgelegde projecten toevoegen aan mijn portfolio om te tonen dat ik ook
+        buiten schoolopdrachten om dingen bouw. Het doel was niet om iets ingewikkelds neer te zetten,
+        maar om een volledig eigen idee — van bedenken tot live zetten als zelfstandige website —
+        helemaal zelf af te werken.
+      </p>
+      <h2>Wat ik hieruit geleerd heb</h2>
+      <p>
+        Dit project leerde me vooral hoe ver je kan komen met alleen vanilla JavaScript en
+        <code>localStorage</code>, zonder meteen naar een framework of database te grijpen. Het
+        dwong me ook om bewust klein te blijven: in plaats van meteen features te stapelen
+        (accounts, subtaken, notificaties), koos ik voor de kleinste versie die al écht bruikbaar is.
+        Daarnaast leerde ik hoe je een klein project als volledig zelfstandig product opzet: een eigen
+        repository, een eigen deployment, en een duidelijke scheiding tussen "mijn portfolio" en
+        "mijn side-project dat toevallig in mijn portfolio wordt getoond".
+      </p>
+      <h2>Volgende stappen</h2>
+      <p>
+        Als ik hier verder aan zou bouwen, zou ik als eerste stap subtaken per doel toevoegen, gevolgd
+        door een optie om doelen te exporteren/importeren als JSON-bestand (zodat je ze kan meenemen
+        tussen apparaten zonder account). Op iets langere termijn zou een gedeeld account met een
+        kleine backend (bijvoorbeeld met dezelfde PHP-aanpak als bij PlanYourTrip.be) het mogelijk
+        maken om doelen te synchroniseren tussen toestellen.
+      </p>
+      <h2>Tools &amp; werkwijze</h2>
+      <p>
+        Ik bouwde GoalTrack in dezelfde stijl als de rest van mijn portfolio: HTML, CSS en JavaScript,
+        met dezelfde visuele "matrix"-huisstijl zodat het project niet als een vreemde eend in de bijt
+        aanvoelt, ook al draait het intussen op een eigen domein. Ik werkte incrementeel: eerst de basis
+        (doel toevoegen en tonen), dan voortgang en filters, vervolgens de styling verfijnd zodat die
+        aansluit bij RoadMate, de Ramen kiosk en de TO-DO website, en tot slot de omzetting naar een
+        volledig zelfstandige repository en Vercel-deployment.
+      </p>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-frame">
+      <button class="lb-close" id="lbClose" aria-label="Sluiten">✕</button>
+
+      <!-- grote klikzones -->
+      <div class="lb-hit left" id="hitLeft" aria-hidden="true"></div>
+      <div class="lb-hit right" id="hitRight" aria-hidden="true"></div>
+
+      <!-- pijlen -->
+      <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Vorige">‹</button>
+      <button class="lb-arrow lb-next" id="lbNext" aria-label="Volgende">›</button>
+
+      <img class="lb-img" id="lbImg" src="" alt="Voorbeeld">
+    </div>
+  </div>
+
+  <script>
+    // "CLOSE" -> altijd terug naar de portfolio-pagina
+    const closeLink = document.getElementById('closeLink');
+    closeLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = 'portfolio.html';
+    });
+
+    // section reveal
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, {threshold:.15});
+    document.querySelectorAll('section').forEach(s => obs.observe(s));
+
+    // ===== Lightbox gallery =====
+    const gallery = Array.from(document.querySelectorAll('#gallery img'));
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const hitLeft = document.getElementById('hitLeft');
+    const hitRight = document.getElementById('hitRight');
+
+    let index = 0;
+
+    function openLB(i){
+      index = i;
+      updateLB();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function prev(){
+      index = (index - 1 + gallery.length) % gallery.length;
+      updateLB();
+    }
+    function next(){
+      index = (index + 1) % gallery.length;
+      updateLB();
+    }
+    function updateLB(){
+      const img = gallery[index];
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || 'Afbeelding';
+    }
+
+    // click handlers voor thumbs
+    gallery.forEach((img,i) => {
+      img.addEventListener('click', () => openLB(i));
+      img.parentElement.addEventListener('click', () => openLB(i));
+    });
+
+    // controls
+    lbClose.addEventListener('click', closeLB);
+    lbPrev.addEventListener('click', prev);
+    lbNext.addEventListener('click', next);
+    hitLeft.addEventListener('click', prev);
+    hitRight.addEventListener('click', next);
+
+    // keyboard
+    window.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLB();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === 'ArrowRight') next();
+    });
+
+    // klik buiten frame om te sluiten
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLB();
+    });
+
+    // swipe (mobiel)
+    let sx = 0, sy = 0;
+    lightbox.addEventListener('touchstart', (e)=>{ const t=e.touches[0]; sx=t.clientX; sy=t.clientY; }, {passive:true});
+    lightbox.addEventListener('touchend', (e)=>{
+      const t=e.changedTouches[0]; const dx=t.clientX - sx; const dy=t.clientY - sy;
+      if(Math.abs(dx) > 40 && Math.abs(dy) < 60){ dx>0 ? prev() : next(); }
+    }, {passive:true});
+  </script>
+</body>
+</html>
